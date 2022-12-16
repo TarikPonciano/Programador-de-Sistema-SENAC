@@ -18,17 +18,33 @@ class Calculadora:
             print("Você digitou algum valor inválido. Tente novamente")
             return "Error na conversão de valor para float"
 
-        if (operador == "+"):
-            print(self.somar(numero2))
-        elif (operador == "-"):
-            print(self.subtrair(numero2))
-        elif (operador == "/"):
-            print(self.dividir(numero2))
-        elif (operador == "*"):
-            print(self.multiplicar(numero2))
-        else:
-            print("O usuário digitou um operador inválido. Tente novamente")
+        # if (operador == "+"):
+        #     print(self.somar(numero2))
+        # elif (operador == "-"):
+        #     print(self.subtrair(numero2))
+        # elif (operador == "/"):
+        #     print(self.dividir(numero2))
+        # elif (operador == "*"):
+        #     print(self.multiplicar(numero2))
+        # else:
+        #     print("O usuário digitou um operador inválido. Tente novamente")
+
+        match operador:
+            case "+":
+                print(self.somar(numero2))
+            case "-":
+                print(self.subtrair(numero2))
+            case "/":
+                print(self.dividir(numero2))
+            case "*":
+                print(self.multiplicar(numero2))
+            case _:
+                print("O usuário digitou um operador inválido! Tente novamente.")
+
+
         return "Deu tudo certo"
+
+        
 
     def somar(self, numero2):
         resultado = self.valor + numero2
@@ -58,7 +74,8 @@ class Calculadora:
 calculadora = Calculadora()
 
 while (True):
-    if (not(calculadora.valor.replace('.','',1).isdigit())):
+
+    if (not(str(calculadora.valor).replace('.','',1).isdigit())):
         calculadora.valor = input("Insira o numero 1: ")
 
     operador = input("Insira o operador: ")
