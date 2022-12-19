@@ -3,8 +3,8 @@ import classeAnimal
 class Coelho(classeAnimal.Animal):
     def __init__(self, nome, cor):
         super().__init__(nome,cor)
-    def pular(self):
-        print("O coelho está pulando")
+    def correr(self):
+        print(f"O {self._nome} está pulando.")
 
 class Cachorro(classeAnimal.Animal):
     def __init__(self, nome, cor):

@@ -8,3 +8,7 @@ coelho = animais.Coelho("Hannah", "branco")
 gato.comer()
 cachorro.comer()
 coelho.comer()
+
+gato.correr()
+cachorro.correr()
+coelho.correr()

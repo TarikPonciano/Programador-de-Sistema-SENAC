@@ -5,3 +5,6 @@ class Animal:
     
     def comer(self):
         print(f"O {self._nome} está comendo")
+
+    def correr(self):
+        print(f"O {self._nome} está correndo")
