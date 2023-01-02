@@ -7,12 +7,67 @@
 
 import random
 
-especiesPokemon = ("Pikachu","akopskaposkpaos")
+especiesPokemon = ("Pikachu","Squirtle", "Eevee", "Dragonite")
 
-meuPokemon  = especiesPokemon[random.randint(0,len(especiesPokemon)-1)]
+meuPokemon = random.choice(especiesPokemon)
 
 match meuPokemon:
     case "Pikachu":
         meuPokemonAtaque = random.randint(30,50)
         meuPokemonDefesa = random.randint(30,50)
         meuPokemonHp = random.randint(30,50)
+    case "Eevee":
+        meuPokemonAtaque = random.randint(20,40)
+        meuPokemonDefesa = random.randint(30,50)
+        meuPokemonHp = random.randint(30,50)
+    case "Squirtle":
+        meuPokemonAtaque = random.randint(30,50)
+        meuPokemonDefesa = random.randint(20,50)
+        meuPokemonHp = random.randint(30,50)
+    case "Dragonite":
+        meuPokemonAtaque = random.randint(30,70)
+        meuPokemonDefesa = random.randint(40,50)
+        meuPokemonHp = random.randint(30,50)
+    case _:
+        meuPokemonAtaque = random.randint(30,50)
+        meuPokemonDefesa = random.randint(30,50)
+        meuPokemonHp = random.randint(30,50)
+
+pokemonInimigo = random.choice(especiesPokemon)
+
+match pokemonInimigo:
+    case "Pikachu":
+        pokemonInimigoAtaque = random.randint(30,50)
+        pokemonInimigoDefesa = random.randint(30,50)
+        pokemonInimigoHp = random.randint(30,50)
+    case "Eevee":
+        pokemonInimigoAtaque = random.randint(20,40)
+        pokemonInimigoDefesa = random.randint(30,50)
+        pokemonInimigoHp = random.randint(30,50)
+    case "Squirtle":
+        pokemonInimigoAtaque = random.randint(30,50)
+        pokemonInimigoDefesa = random.randint(20,50)
+        pokemonInimigoHp = random.randint(30,50)
+    case "Dragonite":
+        pokemonInimigoAtaque = random.randint(30,70)
+        pokemonInimigoDefesa = random.randint(40,50)
+        pokemonInimigoHp = random.randint(30,50)
+    case _:
+        pokemonInimigoAtaque = random.randint(30,50)
+        pokemonInimigoDefesa = random.randint(30,50)
+        pokemonInimigoHp = random.randint(30,50)
+
+forçaMeuPokemon = meuPokemonAtaque + meuPokemonDefesa + meuPokemonHp
+forçaPokemonImigo = pokemonInimigoAtaque + pokemonInimigoDefesa + pokemonInimigoHp
+
+print("Meu Pokemon:",meuPokemon,meuPokemonAtaque,meuPokemonDefesa,meuPokemonHp, forçaMeuPokemon)
+print("Pokemon Inimigo:",pokemonInimigo,pokemonInimigoAtaque,pokemonInimigoDefesa,pokemonInimigoHp,forçaPokemonImigo)
+
+
+
+if forçaMeuPokemon > forçaPokemonImigo:
+    print("Eu ganhei")
+elif forçaMeuPokemon < forçaPokemonImigo:
+    print("Eu perdi")
+else:
+    print("Deu empate")
