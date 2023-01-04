@@ -1,0 +1,2 @@
+import classPokemon
+import classTreinador
