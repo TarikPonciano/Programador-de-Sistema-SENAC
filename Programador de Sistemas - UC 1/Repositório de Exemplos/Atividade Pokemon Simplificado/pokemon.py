@@ -49,6 +49,28 @@ class Jogador(Treinador):
     def __init__(self, nome, pokemons):
         super().__init__(nome, pokemons)
 
+    def escolherPokemon(self):
+        while True:
+            print(f"Escolha seu pokemon: ")
+
+            for i in range(len(self._pokemons)):
+                print(f"{i+1}. {self._pokemons[i]._nome}")
+
+            pokemonEscolhido = input("Digite o número do pokemon escolhido: ")
+
+            #return self._pokemons[int(pokemonEscolhido)-1] <<< Só precisa dessa linha
+
+            #Esses ifs são extra
+            if (pokemonEscolhido.isnumeric()):
+                if (int(pokemonEscolhido) <= len(self._pokemons)):
+                    return self._pokemons[pokemonEscolhido]
+                else:
+                    print("Você escreveu um número maior do que o disponível.")
+            else: 
+                print("Você escreveu um caractere inválido")
+
+         
+
 class Inimigo(Treinador):
     def __init__(self, nome, pokemons):
         super().__init__(nome, pokemons)
@@ -59,11 +81,11 @@ def batalhaPokemon(treinador1, treinador2):
     p1 = treinador1.escolherPokemon()
     p2 = treinador2.escolherPokemon()
 
-    p1Forca = p1._ataque + p1._defesa + p1._hp
-    p2Forca = p2._ataque + p2._defesa + p2._hp
+    p1Forca = (p1._ataque + p1._defesa + p1._hp) * random.randint(1,3)
+    p2Forca = (p2._ataque + p2._defesa + p2._hp) * random.randint(1,3)
 
     print(f"{p1._nome} atacou com {p1._movimento} e força {p1Forca}")
-    print(f"{p2._nome} atacou com {p2._movimento} e forca {p2Forca}")
+    print(f"{p2._nome} atacou com {p2._movimento} e força {p2Forca}")
 
     if (p1Forca > p2Forca):
         print(f"O vencedor foi {p1._nome} com força {p1Forca} do treinador {treinador1._nome}")
@@ -72,11 +94,17 @@ def batalhaPokemon(treinador1, treinador2):
     else:
         print("Deu empate")
 
-pokemon1 = Fogo("Betinho", "Charmander", "Fogo", 100,50,50)
-pokemon2 = Grama("Verdinho", "Bulbasauro", "Grama",200,50,50)
-pokemon3 = Aquatico("Tortuguita", "Squirtle", "Aquatico",300,50,50)
+pokemonsDisponiveis = [
+Fogo("Charmander", "Charmander", "Fogo", 100,50,50),
+Grama("Bulbasauro", "Bulbasauro", "Grama",200,50,50),
+Aquatico("Squirtle", "Squirtle", "Aquatico",300,50,50)
+]
 
-jogador = Jogador("Tarik", [pokemon1, pokemon2, pokemon3])
-inimigo = Inimigo("Bob", [pokemon1, pokemon2, pokemon3])
+# pokemon1 = Fogo("Betinho", "Charmander", "Fogo", 100,50,50)
+# pokemon2 = Grama("Verdinho", "Bulbasauro", "Grama",200,50,50)
+# pokemon3 = Aquatico("Tortuguita", "Squirtle", "Aquatico",300,50,50)
+
+jogador = Jogador("Tarik", [pokemonsDisponiveis[0], pokemonsDisponiveis[1], pokemonsDisponiveis[2]])
+inimigo = Inimigo("Bob", pokemonsDisponiveis)
 
 batalhaPokemon(jogador, inimigo)
