@@ -63,11 +63,20 @@ class Jogador(Treinador):
             #Esses ifs são extra
             if (pokemonEscolhido.isnumeric()):
                 if (int(pokemonEscolhido) <= len(self._pokemons)):
-                    return self._pokemons[pokemonEscolhido]
+                    return self._pokemons[int(pokemonEscolhido)-1]
                 else:
                     print("Você escreveu um número maior do que o disponível.")
             else: 
                 print("Você escreveu um caractere inválido")
+
+    def capturarPokemon(self, pokemonCapturado):
+        self._pokemons.append(pokemonCapturado)
+        print(f"Você capturou o {pokemonCapturado._nome}")
+    
+    def listarPokemons(self):
+        print("Sua lista de pokemons: ")
+        for i in range(len(self._pokemons)):
+                print(f"{i+1}. {self._pokemons[i]._nome}")
 
          
 
@@ -97,7 +106,8 @@ def batalhaPokemon(treinador1, treinador2):
 pokemonsDisponiveis = [
 Fogo("Charmander", "Charmander", "Fogo", 100,50,50),
 Grama("Bulbasauro", "Bulbasauro", "Grama",200,50,50),
-Aquatico("Squirtle", "Squirtle", "Aquatico",300,50,50)
+Aquatico("Squirtle", "Squirtle", "Aquatico",300,50,50),
+Fogo("Charmeleon", "Charmeleon", "Fogo", 200, 100, 100)
 ]
 
 # pokemon1 = Fogo("Betinho", "Charmander", "Fogo", 100,50,50)
@@ -107,4 +117,7 @@ Aquatico("Squirtle", "Squirtle", "Aquatico",300,50,50)
 jogador = Jogador("Tarik", [pokemonsDisponiveis[0], pokemonsDisponiveis[1], pokemonsDisponiveis[2]])
 inimigo = Inimigo("Bob", pokemonsDisponiveis)
 
-batalhaPokemon(jogador, inimigo)
+#batalhaPokemon(jogador, inimigo)
+jogador.listarPokemons()
+jogador.capturarPokemon(pokemonsDisponiveis[3])
+jogador.listarPokemons()
