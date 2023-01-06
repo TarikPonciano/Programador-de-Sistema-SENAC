@@ -49,7 +49,7 @@ class Jogador(Treinador):
     def __init__(self, nome, pokemons):
         super().__init__(nome, pokemons)
 
-    def escolherPokemon(self):
+    def escolherPokemon(self): #Requisitos Obrigatórios #5 e #8 - Esse método permite que o jogador escolha um Pokemon de sua lista para batalhar
         while True:
             print(f"Escolha seu pokemon: ")
 
@@ -69,11 +69,11 @@ class Jogador(Treinador):
             else: 
                 print("Você escreveu um caractere inválido")
 
-    def capturarPokemon(self, pokemonCapturado):
+    def capturarPokemon(self, pokemonCapturado): #Requisito Obrigatório #6 - Essa função recebe o pokemon escolhido e adiciona a lista de pokemons do jogador
         self._pokemons.append(pokemonCapturado)
         print(f"Você capturou o {pokemonCapturado._nome}")
     
-    def listarPokemons(self):
+    def listarPokemons(self): # Requisito Obrigatório #7 - Essa função lista todos os pokemons presentes na lista de pokemons do jogador
         print("Sua lista de pokemons: ")
         for i in range(len(self._pokemons)):
                 print(f"{i+1}. {self._pokemons[i]._nome}")
@@ -85,7 +85,12 @@ class Inimigo(Treinador):
         super().__init__(nome, pokemons)
 
 
-def batalhaPokemon(treinador1, treinador2):
+#Requisito Obrigatório #5 - A função abaixo recebe dois treinadores (Jogador e Inimigo) e invoca
+#os métodos de escolha de Pokemon de cada um. O Jogador pode escolher o próprio pokemon e o Inimigo
+#escolhe um pokemon aleatório de sua lista. Os pokemons são salvos em duas variáveis e seus atributos
+#são somados para compor uma nova variável chamada Força, o Pokemon com a maior Força vence o duelo.
+    
+def batalhaPokemon(treinador1, treinador2): 
 
     p1 = treinador1.escolherPokemon()
     p2 = treinador2.escolherPokemon()
@@ -117,7 +122,7 @@ Fogo("Charmeleon", "Charmeleon", "Fogo", 200, 100, 100)
 jogador = Jogador("Tarik", [pokemonsDisponiveis[0], pokemonsDisponiveis[1], pokemonsDisponiveis[2]])
 inimigo = Inimigo("Bob", pokemonsDisponiveis)
 
-#batalhaPokemon(jogador, inimigo)
+batalhaPokemon(jogador, inimigo)
 jogador.listarPokemons()
 jogador.capturarPokemon(pokemonsDisponiveis[3])
 jogador.listarPokemons()
