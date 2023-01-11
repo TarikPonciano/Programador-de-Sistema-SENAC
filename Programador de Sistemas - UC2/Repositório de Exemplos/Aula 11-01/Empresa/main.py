@@ -1,8 +1,8 @@
-"""
+"""https://github.com/TarikPonciano/Programador-de-Sistema-SENAC
 Criar software de gerenciamento de funcionários
 
 1. Modelar a classe Funcionário e a classe Gerente com base no 
-modelo disponível em banco.json
+modelo disponível em banco.json. Fazer os metodos get e set
 
 2. Modelar a classe Empresa:
     - Deve conter um atributo lista de funcionarios
@@ -24,6 +24,30 @@ modelo disponível em banco.json
 
 """
 import json
+from classEmpresa import Empresa
+from classFuncionario import Funcionario, Gerente
 
 with open("banco.json") as f:
     dados = json.load(f)
+
+funcionarios = []
+
+for func in dados:
+    if func["Cargo"] == "Gerente":
+        funcionarios.append(Gerente(func["ID"],func["Nome"],func["CPF"],func["Salario"],func["Cargo"],func["Login"],func["Senha"]))
+    else: 
+        funcionarios.append(Funcionario(func["ID"],func["Nome"],func["CPF"],func["Salario"],func["Cargo"]))
+
+
+empresa = Empresa(funcionarios)
+print("Bem vindo a Empresa CATEQ")
+print("Faça seu login.")
+
+usuarioLogin = input("Escreva seu login: ")
+
+usuarioSenha = input("Escreva sua senha: ")
+
+empresa.loginFuncionario(usuarioLogin,usuarioSenha)
+
+print(vars(empresa.getFuncionarioLogado()))
+empresa.imprimirFuncionarios()
