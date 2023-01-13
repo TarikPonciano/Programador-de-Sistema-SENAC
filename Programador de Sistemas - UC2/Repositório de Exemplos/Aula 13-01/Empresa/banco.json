@@ -1,0 +1,4 @@
+[
+    {"ID":1, "Nome": "Tarik", "CPF": "111222333-44", "Salario": 2000.00, "Cargo": "Gerente", "Login": "tarik", "Senha": "123"},
+    {"ID":2, "Nome": "Manoel", "CPF": "222333444-55", "Salario": 2000.00, "Cargo": "Recepcionista"}
+]
