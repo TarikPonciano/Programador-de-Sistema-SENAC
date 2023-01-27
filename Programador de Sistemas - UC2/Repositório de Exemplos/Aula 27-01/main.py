@@ -27,6 +27,16 @@ def inserirFuncionario(cur,conexao):
     ''')
     conexao.commit()
 
+def atualizarFuncionario(cur,conexao):
+    idFunc = int(input("Digite o id do funcionário que deseja modificar: "))
+    novoNome = input("Digite o novo nome: ")
+    cur.execute(f'''
+    UPDATE "Funcionarios"
+    SET "Nome" = '{novoNome}'
+    WHERE "ID" = {idFunc}
+    ''')
+    conexao.commit()
+
 
 
 try:
@@ -37,11 +47,10 @@ try:
     cursor = con.cursor()
     print("Conectado")
 
-    inserirFuncionario(cursor, con)
+    atualizarFuncionario(cursor, con)
 
     cursor.close()
     con.close()
-    print("Funcionário adicionado")
 
 except(Exception, psycopg2.Error) as error:
     print("Ocorreu um erro -", error)
