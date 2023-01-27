@@ -10,7 +10,7 @@ import psycopg2 #Para instalar > pip install psycopg2
 def createTableFuncionario(cur,conexao):
 
     cur.execute('''
-    CREATE TABLE "Funcionarios2"(
+    CREATE TABLE "Funcionarios"(
     "ID" serial,
     "Nome" varchar(255),
     "CPF" char(11) NOT NULL,
@@ -19,6 +19,14 @@ def createTableFuncionario(cur,conexao):
     );
     ''')
     conexao.commit()
+
+def inserirFuncionario(cur,conexao):
+    cur.execute('''
+    INSERT INTO "Funcionarios"
+    VALUES(default, 'José Cleber', '12345678910', default)
+    ''')
+    conexao.commit()
+
 
 
 try:
@@ -29,11 +37,11 @@ try:
     cursor = con.cursor()
     print("Conectado")
 
-    createTableFuncionario(cursor, con)
+    inserirFuncionario(cursor, con)
 
     cursor.close()
     con.close()
-    print("Tabela Criada")
+    print("Funcionário adicionado")
 
 except(Exception, psycopg2.Error) as error:
     print("Ocorreu um erro -", error)
