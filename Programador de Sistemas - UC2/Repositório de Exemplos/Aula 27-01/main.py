@@ -5,6 +5,22 @@
 # Func_cpf - char(11) UNIQUE NOT NULL
 # Func_salario - money
 
+'''Atividade para casa:
+Crie uma banco de dados de uma Biblioteca que deverá conter a seguinte tabela:
+
+Livros:
+
+Livro_id
+Livro_nome
+Livro_paginas
+Livro_anoLançamento
+Livro_autor
+
+- Especificar os tipos de cada atributo e criar função no python createTableLivros
+- Usar o código abaixo para criar um CRUD, sistema de gerenciamento da tabela
+
+'''
+
 import psycopg2 #Para instalar > pip install psycopg2 
 
 def createTableFuncionario(cur,conexao):
@@ -38,19 +54,41 @@ def inserirFuncionario(cur,conexao):
     conexao.commit()
 
 def atualizarFuncionario(cur,conexao):
+    listarFuncionario(cur,conexao)
     idFunc = int(input("Digite o id do funcionário que deseja modificar: "))
+
+    cur.execute(f'''
+        SELECT * FROM "Funcionarios"
+        WHERE "ID" = {idFunc}
+    ''')
+    print("Funcionario escolhido:",cur.fetchone())
+
     novoNome = input("Digite o novo nome: ")
+
+    while True:
+        novoCpf = input("Insira o novo CPF do funcionário: ")
+        if len(novoCpf) != 11:
+            print("Tamanho inválido, o cpf precisa conter 11 digitos")
+        else:
+            break
+
     novoSalario = float(input("Digite o novo salário:"))
 
     cur.execute(f'''
     UPDATE "Funcionarios"
-    SET "Nome" = '{novoNome}', "Salário" = {novoSalario}
+    SET "Nome" = '{novoNome}', "Salário" = {novoSalario}, "CPF" = '{novoCpf}'
     WHERE "ID" = {idFunc}
     ''')
     conexao.commit()
 
 def removerFuncionario(cur, conexao):
+    listarFuncionario(cur,conexao)
     idFunc = int(input("Digite o id do funcionário que deseja remover: "))
+    cur.execute(f'''
+        SELECT * FROM "Funcionarios"
+        WHERE "ID" = {idFunc}
+    ''')
+    print("Funcionario escolhido:",cur.fetchone())
     cur.execute(f'''
     DELETE FROM "Funcionarios"
     WHERE "ID" = {idFunc}
@@ -62,7 +100,10 @@ def listarFuncionario(cur, conexao):
     cur.execute('''
     SELECT * FROM "Funcionarios"
     ''')
-    print(cur.fetchall())
+    funcionarios = cur.fetchall()
+    print("ID | Nome | CPF | Salário")
+    for funcionario in funcionarios:
+        print(f"{funcionario[0]} | {funcionario[1]} | {funcionario[2]} | {funcionario[3]}")
 
 
 while True:
