@@ -30,9 +30,19 @@ def inserirFuncionario(cur,conexao):
 def atualizarFuncionario(cur,conexao):
     idFunc = int(input("Digite o id do funcionário que deseja modificar: "))
     novoNome = input("Digite o novo nome: ")
+    novoSalario = float(input("Digite o novo salário:"))
+
     cur.execute(f'''
     UPDATE "Funcionarios"
-    SET "Nome" = '{novoNome}'
+    SET "Nome" = '{novoNome}', "Salário" = {novoSalario}
+    WHERE "ID" = {idFunc}
+    ''')
+    conexao.commit()
+
+def removerFuncionario(cur, conexao):
+    idFunc = int(input("Digite o id do funcionário que deseja modificar: "))
+    cur.execute(f'''
+    DELETE FROM "Funcionarios"
     WHERE "ID" = {idFunc}
     ''')
     conexao.commit()
@@ -47,7 +57,7 @@ try:
     cursor = con.cursor()
     print("Conectado")
 
-    atualizarFuncionario(cursor, con)
+    removerFuncionario(cursor, con)
 
     cursor.close()
     con.close()
