@@ -2,7 +2,7 @@
 
 # Func_id - serial PRIMARY KEY
 # Func_nome - varchar(255)
-# Func_cpf - char(11) NOT NULL
+# Func_cpf - char(11) UNIQUE NOT NULL
 # Func_salario - money
 
 import psycopg2 #Para instalar > pip install psycopg2 
@@ -13,7 +13,7 @@ def createTableFuncionario(cur,conexao):
     CREATE TABLE "Funcionarios"(
     "ID" serial,
     "Nome" varchar(255),
-    "CPF" char(11) NOT NULL,
+    "CPF" char(11) UNIQUE NOT NULL,
     "Salário" money DEFAULT 0.00,
     PRIMARY KEY("ID")
     );
@@ -47,6 +47,13 @@ def removerFuncionario(cur, conexao):
     ''')
     conexao.commit()
 
+def listarFuncionario(cur, conexao):
+
+    cur.execute('''
+    SELECT * FROM "Funcionarios"
+    ''')
+    print(cur.fetchall())
+
 
 
 try:
@@ -57,7 +64,7 @@ try:
     cursor = con.cursor()
     print("Conectado")
 
-    removerFuncionario(cursor, con)
+    listarFuncionario(cursor, con)
 
     cursor.close()
     con.close()
