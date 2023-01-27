@@ -21,9 +21,19 @@ def createTableFuncionario(cur,conexao):
     conexao.commit()
 
 def inserirFuncionario(cur,conexao):
-    cur.execute('''
+    novoNome = input("Insira o nome do novo funcionário: ")
+
+    while True:
+        novoCpf = input("Insira o CPF do novo funcionário: ")
+        if len(novoCpf) != 11:
+            print("Tamanho inválido, o cpf precisa conter 11 digitos")
+        else:
+            break
+        
+    novoSalario = input("Insira o Salário do novo funcionário: ")
+    cur.execute(f'''
     INSERT INTO "Funcionarios"
-    VALUES(default, 'José Cleber', '12345678910', default)
+    VALUES(default, '{novoNome}', '{novoCpf}', {novoSalario})
     ''')
     conexao.commit()
 
@@ -88,7 +98,7 @@ while True:
                 break
             case _:
                 print("Você inseriu algum valor inválido.")
-                
+
         input("Tecle Enter para prosseguir")
 
         cursor.close()
