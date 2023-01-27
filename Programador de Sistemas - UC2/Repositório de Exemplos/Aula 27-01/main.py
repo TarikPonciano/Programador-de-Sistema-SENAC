@@ -40,7 +40,7 @@ def atualizarFuncionario(cur,conexao):
     conexao.commit()
 
 def removerFuncionario(cur, conexao):
-    idFunc = int(input("Digite o id do funcionário que deseja modificar: "))
+    idFunc = int(input("Digite o id do funcionário que deseja remover: "))
     cur.execute(f'''
     DELETE FROM "Funcionarios"
     WHERE "ID" = {idFunc}
@@ -55,19 +55,44 @@ def listarFuncionario(cur, conexao):
     print(cur.fetchall())
 
 
+while True:
+    try:
 
-try:
+        con = psycopg2.connect(database="Empresa",user="postgres", password="postgres", host="localhost", port="5432")
+        #(database="Empresa",user="postgres", password="postgres", host="localhost", port="5432")
 
-    con = psycopg2.connect(database="Empresa",user="postgres", password="postgres", host="localhost", port="5432")
-    #(database="Empresa",user="postgres", password="postgres", host="localhost", port="5432")
+        cursor = con.cursor()
+        print("Conectado")
 
-    cursor = con.cursor()
-    print("Conectado")
+        print('''
+        1. Ver funcionários
+        2. Inserir funcionário
+        3. Modificar funcionario
+        4. Remover funcionário
+        0. Sair do Programa
+        ''')
 
-    listarFuncionario(cursor, con)
+        opcaoMenu = input("Escolha o que deseja fazer: ")
 
-    cursor.close()
-    con.close()
+        match opcaoMenu:
+            case "1":
+                listarFuncionario(cursor, con)
+            case "2":
+                inserirFuncionario(cursor, con)
+            case "3":
+                atualizarFuncionario(cursor, con)
+            case "4":
+                removerFuncionario(cursor, con)
+            case "0":
+                print("Você escolheu sair da aplicação. Até mais!")
+                break
+            case _:
+                print("Você inseriu algum valor inválido.")
+                
+        input("Tecle Enter para prosseguir")
 
-except(Exception, psycopg2.Error) as error:
-    print("Ocorreu um erro -", error)
+        cursor.close()
+        con.close()
+
+    except(Exception, psycopg2.Error) as error:
+        print("Ocorreu um erro -", error)
