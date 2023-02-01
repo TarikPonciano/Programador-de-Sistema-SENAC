@@ -1,9 +1,25 @@
 from Controle.classConexao import Conexao
+from Modelo.classFuncionario import Funcionario
 
 import psycopg2
 
 try:
     con = Conexao("Empresa", "localhost", "5432", "postgres", "postgres")
+
+    funcionario = Funcionario(None, "Marcos","05955150374","2000",idDepartamento="3")
+    funcionario.imprimirFuncionario()
+    con.manipularBanco(funcionario.inserirFuncionario("Funcionarios"))
+
+    print(con.consultarBanco('''
+    SELECT * FROM "Funcionarios"
+    
+    '''))
+
+
+    con._db.close()
+
+
+
 
     
 
