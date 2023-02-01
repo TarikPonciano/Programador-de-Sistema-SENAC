@@ -24,4 +24,22 @@ class Funcionario:
         '{self.salario}', '{self.idDepartamento}')
         '''
         return codigoSql
+
+    def atualizarFuncionario(self,tabela):
+        codigoSql = f'''
+        UPDATE "{tabela}"
+        SET "Nome" = '{self.nome}', "CPF" = '{self.cpf}', "Salário" = '{self.salario}'
+        Where "ID" = '{self.id}'
+        
+        '''
+
+        return codigoSql
+    
+    def atualizarDepartamentoFuncionario(self,tabela):
+        codigoSql = f'''
+        UPDATE "{tabela}"
+        SET "ID_Departamento" = '{self.idDepartamento}'
+        WHERE "ID" = '{self.id}'
+        '''
+        return codigoSql
         
