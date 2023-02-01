@@ -1,19 +1,27 @@
 from Controle.classConexao import Conexao
 from Modelo.classFuncionario import Funcionario
 
+#Aplicar a estrutura Modelo, Visualização, Controle ao projeto Biblioteca
+#Criar classe Livro, criar classe Conexão
+#Replicar o código abaixo para atualizar Livros no seu banco de dados
+
+
 import psycopg2
 
-try:
-    con = Conexao("Empresa", "localhost", "5432", "postgres", "postgres")
+def mostrarFuncionarios(conexao):
 
-
-    listaFuncionarios = con.consultarBanco('''
+    listaFuncionarios = conexao.consultarBanco('''
     SELECT * FROM "Funcionarios"
     ORDER BY "ID" ASC
     ''')
     print("ID | Nome")
     for func in listaFuncionarios:
         print(f"{func[0]} - {func[1]} \n")
+
+try:
+    con = Conexao("Empresa", "localhost", "5432", "postgres", "postgres")
+
+    mostrarFuncionarios(con)
 
     funcionarioEscolhido = input("Escolha o id do funcionario que deseja alterar: ")
 
@@ -40,9 +48,8 @@ try:
             con.manipularBanco(funcionario.atualizarDepartamentoFuncionario("Funcionarios"))
 
     print(funcionario.imprimirFuncionario())
-    print(con.consultarBanco('''Select * from "Funcionarios"'''))
 
-
+    mostrarFuncionarios(con)
 
     con._db.close()
 
