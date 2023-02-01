@@ -1,7 +1,7 @@
 from Controle.classConexao import Conexao
 from Modelo.classFuncionario import Funcionario
 
-#Aplicar a estrutura Modelo, Visualização, Controle ao projeto Biblioteca
+#Aplicar a estrutura Modelo, Visualização, Controle ao projeto Biblioteca das aulas 27-01 e 30-01
 #Criar classe Livro, criar classe Conexão
 #Replicar o código abaixo para atualizar Livros no seu banco de dados
 
