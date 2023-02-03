@@ -24,3 +24,7 @@ class Conexao:
         self._db.commit()
         
         cursor.close
+
+    def fechar(self):
+        
+        self._db.close()

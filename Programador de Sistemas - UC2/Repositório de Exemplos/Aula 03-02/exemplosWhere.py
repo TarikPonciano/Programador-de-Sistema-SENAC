@@ -39,6 +39,12 @@ if __name__ == "__main__":
         print(funcionario)
 
 
+        #con._db.close()
+        con.fechar()
+
+
+
+
 
 
     
