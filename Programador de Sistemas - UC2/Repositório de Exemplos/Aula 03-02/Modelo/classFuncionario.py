@@ -6,6 +6,7 @@ class Funcionario:
         self.salario = salario
         self.idDepartamento = idDepartamento
 
+
     def imprimirFuncionario(self):
 
         print(f'''
@@ -42,4 +43,22 @@ class Funcionario:
         WHERE "ID" = '{self.id}'
         '''
         return codigoSql
+
+    def setCpf(self, novoCpf):
+        if(len(novoCpf) != 11):
+            print("CPF Inválido.")
+            return False
+        else:
+            self.cpf = novoCpf
+            print("CPF válido")
+            return True
+            
+    def setCpfRecursivo(self, novoCpf):
+        if(len(novoCpf) != 11):
+            print("CPF Inválido.")
+            self.setCpf(input("Digite o CPF:"))
+        else:
+            self.cpf = novoCpf
+            print("CPF válido")
+            
         
