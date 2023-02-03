@@ -27,7 +27,7 @@ if __name__ == "__main__":
         WHERE "ID" = 2;
         ''')
 
-        print("Pesquisa por ID:",funcionario)
+        print("Pesquisa por ID igual:",funcionario)
 
         #Consulta Operador =, usando o Nome
         # nomePesquisa = input("Digite o nome do Funcionário: ")
@@ -36,30 +36,91 @@ if __name__ == "__main__":
         WHERE "Nome" = 'Maria';
         ''')
 
-        print("Pesquisa por nome:",funcionario)
+        print("Pesquisa por nome igual:",funcionario)
 
         #Consulta Operador >, usando o Salário
 
-        print("Pesquisa por salário:",con.consultarBanco(f'''
+        print("Pesquisa por salário maior:",con.consultarBanco(f'''
         SELECT * FROM "Funcionarios"
         WHERE "Salário" > '3000'
-        ORDER BY "ID"; 
+        ORDER BY "ID"ASC; 
         '''))
 
         #Consulta Operador <, usando a coluna desejada
 
+        print("Pesquisa por Salário menor:",con.consultarBanco(f'''
+        SELECT * FROM "Funcionarios"
+        WHERE "Salário" < '5000'
+        ORDER BY "ID" ASC; 
+        '''))
+
         #Consulta Operador >=, usando a coluna desejada
+        
+        print("Pesquisa por nome Maior ou Igual:",con.consultarBanco(f'''
+        SELECT * FROM "Funcionarios"
+        WHERE "Nome" >= 'Maria'
+        ORDER BY "ID" ASC; 
+        '''))
+
 
         #Consulta Operador <=, usando a coluna desejada
 
+        print("Pesquisa por salário Menor ou Igual:",con.consultarBanco(f'''
+        SELECT * FROM "Funcionarios"
+        WHERE "Salário" <= '5000'
+        ORDER BY "ID" ASC; 
+        '''))
+
         #Consulta Operador <>, usando a coluna desejada
 
+        print("Pesquisa por nome diferente:",con.consultarBanco(f'''
+        SELECT * FROM "Funcionarios"
+        WHERE "Nome" <> 'Maria'
+        ORDER BY "ID" ASC; 
+        '''))
+
+        #Consulta Operador Between
+
+        print("Pesquisa por Salário entre valor: ",con.consultarBanco(f'''
+        SELECT * FROM "Funcionarios"
+        WHERE "Salário" BETWEEN '2000' AND '5000'
+        '''))
+
+        #Consulta Operador IN
+
+        print("Pesquisa por lista de nomes: ",con.consultarBanco(f'''
+        SELECT * FROM "Funcionarios"
+        WHERE "Nome" IN ('Maria', 'Matheus', 'Roberta')
+        '''))
+
+        #Consulta Operador Like
+
+        print("Pesquisa por nome: ",con.consultarBanco(f'''
+        SELECT * FROM "Funcionarios"
+        WHERE "Nome" LIKE '%Mar%'
+        '''))
+
+        #'Mar%' - Pesquisar Mar no começo do nome
+        #'%Mar%' - Pesquisar Mar em qualquer parte do nome
+        #'%Mar' - Pesquisar Mar no final do nome
+
+        #Consulta Operador Not
+
+        print("Pesquisa por nome: ",con.consultarBanco(f'''
+        SELECT * FROM "Funcionarios"
+        WHERE "Nome" NOT LIKE '%Mar%'
+        '''))
+
+        print("Pesquisa por nome: ",con.consultarBanco(f'''
+        SELECT * FROM "Funcionarios"
+        WHERE "Nome" NOT IN ('Roberta', 'Matheus')
+        '''))
+
+        
+
+        #Consulta Operador NoT
         #con._db.close()
         con.fechar()
-
-
-
-
 
 
     
