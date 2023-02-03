@@ -7,7 +7,39 @@ if __name__ == "__main__":
     from Controle.classConexao import Conexao
 
     try:
-        print("Código aqui")
+        con = Conexao(parametroDb="Empresa", parametroHost="localhost", parametroPort="5432", parametroUser="postgres", parametroPassword="postgres")
+
+        #Consulta básica, pega todos
+        funcionarios = con.consultarBanco('''
+        Select * FROM "Funcionarios"
+        ORDER BY "ID" ASC
+        ''')
+
+        for funcionario in funcionarios:
+            print(f'''
+            {funcionario[0]} - {funcionario[1]} - {funcionario[2]} - {funcionario[3]} - {funcionario[4]}
+            ''')
+
+        #Consulta Operador =, usando o ID
+
+        funcionario = con.consultarBanco('''
+        SELECT * FROM "Funcionarios"
+        WHERE "ID" = 2
+        ''')
+
+        print(funcionario)
+
+        #Consulta Operador =, usando o Nome
+        nomePesquisa = input("Digite o nome do Funcionário: ")
+        funcionario = con.consultarBanco(f'''
+        SELECT * FROM "Funcionarios"
+        WHERE "Nome" = '{nomePesquisa}'
+        ''')
+
+        print(funcionario)
+
+
+
 
     
     except(Exception, psycopg2.Error) as error:
