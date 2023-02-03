@@ -11,8 +11,8 @@ if __name__ == "__main__":
 
         #Consulta básica, pega todos
         funcionarios = con.consultarBanco('''
-        Select * FROM "Funcionarios"
-        ORDER BY "ID" ASC
+        SELECT * FROM "Funcionarios"
+        ORDER BY "ID" ASC;
         ''')
 
         for funcionario in funcionarios:
@@ -24,20 +24,35 @@ if __name__ == "__main__":
 
         funcionario = con.consultarBanco('''
         SELECT * FROM "Funcionarios"
-        WHERE "ID" = 2
+        WHERE "ID" = 2;
         ''')
 
-        print(funcionario)
+        print("Pesquisa por ID:",funcionario)
 
         #Consulta Operador =, usando o Nome
-        nomePesquisa = input("Digite o nome do Funcionário: ")
+        # nomePesquisa = input("Digite o nome do Funcionário: ")
         funcionario = con.consultarBanco(f'''
         SELECT * FROM "Funcionarios"
-        WHERE "Nome" = '{nomePesquisa}'
+        WHERE "Nome" = 'Maria';
         ''')
 
-        print(funcionario)
+        print("Pesquisa por nome:",funcionario)
 
+        #Consulta Operador >, usando o Salário
+
+        print("Pesquisa por salário:",con.consultarBanco(f'''
+        SELECT * FROM "Funcionarios"
+        WHERE "Salário" > '3000'
+        ORDER BY "ID"; 
+        '''))
+
+        #Consulta Operador <, usando a coluna desejada
+
+        #Consulta Operador >=, usando a coluna desejada
+
+        #Consulta Operador <=, usando a coluna desejada
+
+        #Consulta Operador <>, usando a coluna desejada
 
         #con._db.close()
         con.fechar()
