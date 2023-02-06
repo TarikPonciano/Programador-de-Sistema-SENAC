@@ -6,6 +6,11 @@
 #   - Entidades: Livros e Clientes Relacionamentos: Aluguel
 #   - Criar banco de dados e tabelas
 #   - Integrar banco com Python e criar funções de manipulação das tabelas
+#   - Ver Clientes, Livros e Alugueis
+#   - Inserir Clientes
+#   - Registrar Aluguel
+
+
 import psycopg2
 from Controle.classConexao import Conexao
 from Modelo.classCliente import Cliente
@@ -102,10 +107,13 @@ def menuClientes(conexao):
                         opcoes = input("Digite o numero da opção:")
                         match opcoes:
                             case "1":
+                                print(f"Alugueis do Cliente {clienteEscolhido._nome}")
                                 resultado = conexao.consultarBanco(clienteEscolhido.consultarAlugueis())
                                 if resultado != []:
-                                    print("ID | Data")
+                                    
+                                    print("ID | Livro | Data")
                                     for aluguel in resultado:
+                                        
                                         print(f"{aluguel[0]} | {aluguel[3]}")
                                 else:
                                     print("Esse usuário não possui alugueis")
