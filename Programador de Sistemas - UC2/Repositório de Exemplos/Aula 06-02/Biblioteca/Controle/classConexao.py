@@ -2,12 +2,14 @@ import psycopg2
 
 class Conexao:
     def __init__(self, parametroDB, parametroHost, parametroPort, parametroUser,parametroPassword):
-        self._db = psycopg2.connect(database=parametroDB, host=parametroHost, port=parametroPort, user=parametroUser, parametroPassword=parametroPassword)
+        self._db = psycopg2.connect(database=parametroDB, host=parametroHost, port=parametroPort, user=parametroUser, password=parametroPassword)
 
     def consultarBanco(self, sql):
         cursor = self._db.cursor()
 
-        resultado = cursor.execute(sql)
+        cursor.execute(sql)
+
+        resultado = cursor.fetchall()
 
         cursor.close()
 
