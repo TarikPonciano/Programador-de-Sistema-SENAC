@@ -1,4 +1,18 @@
+#Código da tabela utilizada
+
+# CREATE TABLE "Funcionario"(
+# "id" int GENERATED ALWAYS AS IDENTITY,
+# "nome" varchar(255) NOT NULL,
+# "cpf" char(11) NOT NULL UNIQUE
+# "idade" int NOT NULL,
+# PRIMARY KEY ("id"));
+
+
+
 import PySimpleGUI as sg 
+import psycopg2
+from Controle.classConexao import Conexao
+from Modelo.classFuncionario import Funcionario
 
 sg.theme("DarkAmber")
 
@@ -18,6 +32,14 @@ layout = [[sg.Column(telaInicial, key="-TelaInicial-", visible=True), sg.Column(
 
 window = sg.Window("Sistema de Gestão", layout)
 
+try:
+    con = Conexao("TesteEmpresa", "localhost","5432","postgres","postgres")
+
+    print("Deu certo")
+
+except(Exception, psycopg2.Error) as error:
+    print("Ocorreu um erro - ")
+
 while True:
 
     event, values = window.read()
@@ -33,14 +55,8 @@ while True:
         window['-TelaInserir-'].update(visible=False)
     
     if event =="-FuncionarioInserirEnviar-":
-        nomeFuncionario = values["-InserirNomeFuncionario-"]
-        cpfFuncionario = values["-InserirCpfFuncionario-"]
-        idadeFuncionario = values["-InserirIdadeFuncionario-"]
-
-        print(f'''
-        Nome: {nomeFuncionario}
-        CPF: {cpfFuncionario}
-        Idade: {idadeFuncionario}
-        ''')
+        funcionario = Funcionario("default", values["-InserirNomeFuncionario-"], values["-InserirCpfFuncionario-"], values["-InserirIdadeFuncionario-"] )
+        con.manipularBanco(funcionario.inserirFuncionario("Funcionario"))
+        sg.popup("Deu Certo!")
 
 window.close()
