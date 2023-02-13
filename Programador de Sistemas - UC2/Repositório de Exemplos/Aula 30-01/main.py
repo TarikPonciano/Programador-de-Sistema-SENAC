@@ -4,7 +4,7 @@
 # Func_nome - varchar(255)
 # Func_cpf - char(11) #UNIQUE NOT NULL#
 # Func_salario - money
-# Dept_id - 
+# Dept_id - int
 # CONSTRAINT fk_departamento
 #   FOREIGN KEY ("ID_Dept")
 #   REFERENCES "Departamento"("ID")
