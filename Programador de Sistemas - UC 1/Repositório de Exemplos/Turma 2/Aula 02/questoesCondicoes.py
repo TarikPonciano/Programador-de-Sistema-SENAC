@@ -47,7 +47,61 @@ def questao3():
         print("A multiplicação foi", C)
 
 
+#Questão 4 -Escreva um algoritmo que leia três valores inteiros e diferentes e mostre-os em ordem
+#decrescente. 
 
+def questao4():
+
+    # valores = [30,50,20,100,200,23,10,11,40]
+    # valores.sort(reverse=True)
+
+    # print(valores)
+
+    A = int(input("Digite o valor A: "))
+    B = int(input("Digite o valor B: "))
+    C = int(input("Digite o valor C: "))
+
+    primeiro = A
+    segundo = B
+    terceiro = C
+
+    if A==B or A==C or B==C:
+
+        print("Eles são iguais")
+
+    elif(A>=B and A>=C):
+        primeiro = A
+        if(B>=C):
+            segundo = B
+            terceiro = C
+        else:
+            segundo = C
+            terceiro = B
+    
+    elif(B>=A and B>=C):
+        primeiro = B
+        if(A>=C):
+            segundo = A
+            terceiro = C
+        else:
+            segundo = C
+            terceiro = A
+    
+    elif(C>=B and C>=A):
+        primeiro = C
+        if(B>=A):
+            segundo = B
+            terceiro = A
+        else:
+            segundo = A
+            terceiro = B
+
+    else:
+        print("Algo deu errado")
+
+    print(primeiro,segundo,terceiro)
+
+questao4()
 
 
 
