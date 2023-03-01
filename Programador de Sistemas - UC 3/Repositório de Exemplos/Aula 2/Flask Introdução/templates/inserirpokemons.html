@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset ="UTF-8">
+    <title>Teste Flask - Inserir Pokemons</title>
+
+</head>
+
+<body>
+    <h1>Inserir Pokemon</h1>
+
+    <form method="post">
+
+        <div >
+            <label> ID </label>
+            <input type="text" name="idPokemon" placeholder="Digitar ID do Pokemon" value="{{request.form['id']}}">
+        </div>
+
+        <div>
+            <label> Espécie </label>
+            <input type="text" name="speciesPokemon" placeholder="Digitar Espécie do Pokemon" value="{{request.form['nome']}}">
+        </div>
+
+        <div>
+            <label> Peso </label>
+            <input type="text" name="weigthPokemon" placeholder="Digitar Peso do Pokemon" value="{{request.form['peso']}}">
+        </div>
+
+        <div>
+            <label> Altura </label>
+            <input type="text" name="heightPokemon" placeholder="Digitar Altura do Pokemon" value="{{request.form['altura']}}">
+        </div>
+
+        <div>
+            <label> Tipo </label>
+            <input type="text" name="typePokemon" placeholder="Digitar Tipo do Pokemon" value="{{request.form['tipo']}}">
+        </div>
+
+        <div>
+            <button type="submit">Inserir Pokemon</button>
+        </div>
+
+    </form>
+
+</body>
+
+</html>

@@ -19,6 +19,10 @@ def verPokemons():
         return render_template("pokemons.html", pokemons=pokemons)
     except(Exception, psycopg2.Error) as error:
         return f"Ocorreu um erro {error}"
+    
+@app.route("/Pokemons/Inserir")
+def inserirPokemons():
+    return render_template("inserirPokemons.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
