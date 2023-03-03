@@ -1,6 +1,9 @@
 from flask import Flask, render_template, request,flash
 import psycopg2
+from Controle.classConexao import Conexao
+from Modelo.classPokemon import Pokemon
 
+con = Conexao("Pokemon", "localhost", "5432", "postgres", "postgres")
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "12314124" 
 
@@ -10,52 +13,39 @@ def home():
 
 @app.route("/Pokemons")
 def verPokemons():
-    try:
-        con = psycopg2.connect(database="Pokemon",user = "postgres",password = "postgres", host="localhost", port="5432")
-        cursor = con.cursor()
-        cursor.execute('''SELECT * FROM "Pokemons"
-        ORDER BY "Id" ASC''')
-        pokemons = cursor.fetchall()
+    resultado = con.consultarBanco('''Select * FROM "Pokemons"
+     ORDER BY "Id" ASC ''')   
 
-        print(pokemons)
+    if "Ocorreu um erro" in resultado:
+        return resultado
+    else:
+        return render_template("pokemons.html", pokemons=resultado) 
 
-        cursor.close()
-        con.close()
-        
-        return render_template("pokemons.html", pokemons=pokemons)
-    except(Exception, psycopg2.Error) as error:
-        return f"Ocorreu um erro {error}"
-    
+
+
 @app.route("/Pokemons/Inserir", methods=("GET","POST"))
 def inserirPokemons():
     if request.method == "POST":
 
-        idPokemon = request.form['id']
-        nomePokemon = request.form['nome']
-        pesoPokemon = request.form['peso']
-        alturaPokemon = request.form['altura']
-        tipoPokemon = request.form['tipo']
+        pokemon = Pokemon(None,None,None,None,None)
 
-        try:
-            con = psycopg2.connect(database="Pokemon",user = "postgres",password = "postgres", host="localhost", port="5432")
-            cursor = con.cursor()
+        pokemon._id = request.form['id']
+        pokemon._especie = request.form['nome']
+        pokemon._peso = request.form['peso']
+        pokemon._altura = request.form['altura']
+        pokemon._tipo = request.form['tipo']
 
-            cursor.execute(f'''
-            INSERT INTO "Pokemons"
-            Values('{idPokemon}', '{nomePokemon}', '{pesoPokemon}', '{alturaPokemon}', '{tipoPokemon}')
-            ''')
-            con.commit()
-            cursor.close()
-            con.close()
+        resultado = con.manipularBanco(pokemon.sqlInserirPokemon())
 
-            flash("Deu certo")
+        if "Deu certo" == resultado:
 
-            return render_template("pokemons.html")
-        except(Exception, psycopg2.Error) as error:
-            return f"Ocorreu um erro {error}"
+            return render_template("inserirpokemons.html")
+        else:
+            return resultado
+
 
     else:
-        return render_template("inserirPokemons.html")
+        return render_template("inserirpokemons.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
