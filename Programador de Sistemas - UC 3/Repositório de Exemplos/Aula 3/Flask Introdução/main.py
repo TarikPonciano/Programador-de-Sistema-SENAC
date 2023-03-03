@@ -39,6 +39,7 @@ def inserirPokemons():
 
         if "Deu certo" == resultado:
 
+            request.form = ''
             return render_template("inserirpokemons.html")
         else:
             return resultado
@@ -46,6 +47,18 @@ def inserirPokemons():
 
     else:
         return render_template("inserirpokemons.html")
+    
+@app.route("/Pokemons/<int:poke_id>")
+def verPokemonEspecifico(poke_id):
+    pokeId = poke_id
+    resultado = con.consultarBanco(f'''Select * FROM "Pokemons"
+    WHERE "Id" = {pokeId} ''')[0]
+
+    if "Ocorreu um erro" in resultado:
+        return resultado
+    else:
+        pokemonEscolhido = Pokemon(resultado[0],resultado[1],resultado[2],resultado[3],resultado[4])
+        return render_template("verpokemons.html", p = pokemonEscolhido.informacoes())
 
 if __name__ == "__main__":
     app.run(debug=True)
