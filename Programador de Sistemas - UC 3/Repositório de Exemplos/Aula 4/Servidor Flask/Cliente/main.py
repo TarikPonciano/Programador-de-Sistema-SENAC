@@ -1,10 +1,11 @@
 import requests
 
+
 def verPokedex():
 
     try:
         requisicao = requests.get("http://127.0.0.1:5000/Pokemons")
-        
+
         pokemons = requisicao.json()
         limite = int(input("Quantos pokemons deseja visualizar:"))
         print("ID | Espécie | Altura | Peso | Tipo")
@@ -16,13 +17,29 @@ def verPokedex():
             ''')
             contador += 1
 
-            if contador == limite:
+            if contador >= limite:
                 break
 
-        
+    except (Exception, requests.ConnectionError, requests.JSONDecodeError) as error:
+        print("Ocorreu um erro", error)
 
-    
-    except(Exception, requests.ConnectionError, requests.JSONDecodeError) as error:
+def verPokemonPorID():
+    try:
+        idPokemon = input("Digite o id do pokemon:")
+        requisicao = requests.get(f"http://127.0.0.1:5000/Pokemons/{idPokemon}")
+        pokemon = requisicao.json()[0]
+        
+        print(f'''
+        
+        ID - {pokemon[0]}
+        Espécie - {pokemon[1]}
+        Altura - {pokemon[2]}
+        Peso - {pokemon[3]}
+        Tipo - {pokemon[4]}
+        
+        ''')
+
+    except (Exception, requests.ConnectionError, requests.JSONDecodeError) as error:
         print("Ocorreu um erro", error)
 
 while True:
@@ -59,4 +76,3 @@ while True:
             print("Escolha uma opção válida")
 
     input("Tecle Enter para continuar")
-        
