@@ -42,6 +42,48 @@ def verPokemonPorID():
     except (Exception, requests.ConnectionError, requests.JSONDecodeError) as error:
         print("Ocorreu um erro", error)
 
+def atualizarPokemon():
+    try:
+        idPokemon = input("Escolha o id do Pokemon que deseja atualizar")
+
+        requisicao = requests.get(f"http://127.0.0.1:5000/Pokemons/{idPokemon}")
+        pokemon = requisicao.json()[0]
+        
+        print(f'''
+        
+        ID - {pokemon[0]}
+        Espécie - {pokemon[1]}
+        Altura - {pokemon[2]}
+        Peso - {pokemon[3]}
+        Tipo - {pokemon[4]}
+        
+        ''')
+
+        opcoes = input("Digite 1 para modificar esse pokemon e 0 para sair:")
+        
+        match opcoes:
+            case "1":
+                pokemonID = input("Digite o id:")
+                pokemonEspecie = input("Digite a especie:")
+                pokemonAltura = input("Digite a altura:")
+                pokemonPeso = input("Digite o peso")
+                pokemonTipo = input("Digite o tipo:")
+
+                pokemonAtributos = [pokemonID,pokemonEspecie,pokemonAltura,pokemonPeso,pokemonTipo]
+
+                requests.post(f"http://127.0.0.1:5000/Pokemons/{idPokemon}/update", json= pokemonAtributos)
+            case "0":
+                return False
+    except (Exception, requests.ConnectionError, requests.JSONDecodeError) as error:
+        print("Ocorreu um erro", error)
+
+def removerPokemon():
+    try:
+        idPokemon = input("Digite o id do Pokemon que deseja remover:")
+        requests.post(f"http://127.0.0.1:5000/Pokemons/{idPokemon}/delete")
+    except (Exception, requests.ConnectionError, requests.JSONDecodeError) as error:
+        print("Ocorreu um erro", error)
+
 while True:
 
     print('''
