@@ -9,6 +9,9 @@
 # Criar função para multiplicação
 # Criar função para divisão
 
+# Adapte sua calculadora, para pedir novamente as informações
+# caso o usuário tenha escolhido opções inválidas
+
 
 def main():
     while True:
