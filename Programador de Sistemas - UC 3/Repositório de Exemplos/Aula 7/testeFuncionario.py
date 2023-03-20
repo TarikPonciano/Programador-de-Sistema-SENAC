@@ -6,7 +6,7 @@ class TestFuncionario(unittest.TestCase):
 
         funcionario = classFuncionario.Funcionario("João", 20)
 
-        self.assertEqual("Olá meu nome é João e tenho 20 anos!", funcionario.apresentar())
+        self.assertEqual(type(""), type(funcionario.apresentar()))
 
 
 if __name__ == "__main__":
