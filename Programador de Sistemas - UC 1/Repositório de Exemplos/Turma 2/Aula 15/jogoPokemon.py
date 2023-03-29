@@ -7,3 +7,4 @@ meuCharmander.fazerBarulho()
 meuCharmander.batalha(meuSquirtle)
 meuSquirtle.batalha(meuCharmander)
 meuBulbasauro.batalha(meuCharmander)
+

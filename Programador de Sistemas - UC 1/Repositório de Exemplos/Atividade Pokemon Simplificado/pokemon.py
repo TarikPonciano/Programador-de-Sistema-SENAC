@@ -53,8 +53,7 @@ class Jogador(Treinador):
         while True:
             print(f"Escolha seu pokemon: ")
 
-            for i in range(len(self._pokemons)):
-                print(f"{i+1}. {self._pokemons[i]._nome}")
+            self.listarPokemons()
 
             pokemonEscolhido = input("Digite o número do pokemon escolhido: ")
 
@@ -112,7 +111,7 @@ pokemonsDisponiveis = [
 Fogo("Charmander", "Charmander", "Fogo", 100,50,50),
 Grama("Bulbasauro", "Bulbasauro", "Grama",200,50,50),
 Aquatico("Squirtle", "Squirtle", "Aquatico",300,50,50),
-Fogo("Charmeleon", "Charmeleon", "Fogo", 200, 100, 100)
+Fogo("Charmeleon", "Charmeleon", "Fogo", 200, 100, 100),
 ]
 
 # pokemon1 = Fogo("Betinho", "Charmander", "Fogo", 100,50,50)
@@ -123,6 +122,8 @@ jogador = Jogador("Tarik", [pokemonsDisponiveis[0], pokemonsDisponiveis[1], poke
 inimigo = Inimigo("Bob", pokemonsDisponiveis)
 
 batalhaPokemon(jogador, inimigo)
+input()
 jogador.listarPokemons()
 jogador.capturarPokemon(pokemonsDisponiveis[3])
-jogador.listarPokemons()
+input()
+batalhaPokemon(jogador,inimigo)

@@ -163,6 +163,8 @@ while True:
         batalhaPokemon(jogador,inimigo)
     else:
         print("Você digitou algo inválido, tente novamente.")
+
+    input()
     
 
 
