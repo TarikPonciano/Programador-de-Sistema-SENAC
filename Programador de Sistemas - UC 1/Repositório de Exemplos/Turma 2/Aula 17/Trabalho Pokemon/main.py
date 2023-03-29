@@ -203,6 +203,3 @@ while True:
     input("Digite Enter para continuar.")
 
 
-
-
-
