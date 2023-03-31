@@ -1,0 +1,44 @@
+[
+  {
+    "nome": "Funcionario 1",
+    "cpf": "111.111.111-11",
+    "salario": 5000,
+    "cargo": "Gerente",
+    "departamento": "Vendas"
+  },
+  {
+    "nome": "Funcionario 2",
+    "cpf": "222.222.222-22",
+    "salario": 6000,
+    "cargo": "Vendedor",
+    "departamento": "Vendas"
+  },
+  {
+    "nome": "Rogerinho",
+    "cpf": "Negativado",
+    "salario": 1230,
+    "cargo": "Piloto",
+    "departamento": "Entregas"
+  },
+  {
+    "nome": "Tarik Ponciano",
+    "cpf": "123131231",
+    "salario": 9999999.0,
+    "cargo": "Instrutor",
+    "departamento": "Senac"
+  },
+  {
+    "nome": "qdqdqwdqw",
+    "cpf": "123123123123",
+    "salario": 12312312.0,
+    "cargo": "qwdqwd",
+    "departamento": "123123"
+  },
+  {
+    "nome": "qdqwdqwd",
+    "cpf": "13112314",
+    "salario": 1231231231.0,
+    "cargo": "adwfwfw",
+    "departamento": "fwefwefw"
+  }
+]
