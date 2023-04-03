@@ -1,0 +1,56 @@
+[
+  {
+    "especie": "bulbasaur",
+    "peso": 69,
+    "altura": 7,
+    "N\u00ba Pokedex": 1
+  },
+  {
+    "especie": "ivysaur",
+    "peso": 130,
+    "altura": 10,
+    "N\u00ba Pokedex": 2
+  },
+  {
+    "especie": "venusaur",
+    "peso": 1000,
+    "altura": 20,
+    "N\u00ba Pokedex": 3
+  },
+  {
+    "especie": "charmander",
+    "peso": 85,
+    "altura": 6,
+    "N\u00ba Pokedex": 4
+  },
+  {
+    "especie": "charmeleon",
+    "peso": 190,
+    "altura": 11,
+    "N\u00ba Pokedex": 5
+  },
+  {
+    "especie": "charizard",
+    "peso": 905,
+    "altura": 17,
+    "N\u00ba Pokedex": 6
+  },
+  {
+    "especie": "squirtle",
+    "peso": 90,
+    "altura": 5,
+    "N\u00ba Pokedex": 7
+  },
+  {
+    "especie": "wartortle",
+    "peso": 225,
+    "altura": 10,
+    "N\u00ba Pokedex": 8
+  },
+  {
+    "especie": "blastoise",
+    "peso": 855,
+    "altura": 16,
+    "N\u00ba Pokedex": 9
+  }
+]
