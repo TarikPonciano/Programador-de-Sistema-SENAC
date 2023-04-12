@@ -1,0 +1,13 @@
+{
+    "funcionarios": [
+        {"id_funcionario":1, "nome": "Marcos", "cpf":"0001","id_departamento":10}
+        
+
+
+    ],
+    "departamento": [
+        {"id_departamento":10, "nome_departamento":"Vendas" }
+    ]
+
+
+}

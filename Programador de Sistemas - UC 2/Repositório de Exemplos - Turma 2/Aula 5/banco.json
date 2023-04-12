@@ -1,0 +1,24 @@
+{
+    "funcionarios":[
+        {"ID_Funcionario": 1, "Nome": "Funcionario 1", "ID_Departamento": 1},
+        {"ID_Funcionario": 2, "Nome": "Funcionario 2", "ID_Departamento": 2},
+        {"ID_Funcionario": 3, "Nome": "Funcionario 3", "ID_Departamento": 1},
+        {"ID_Funcionario": 4, "Nome": "Funcionario 4", "ID_Departamento": 2},
+        {"ID_Funcionario": 5, "Nome": "Funcionario 5", "Salario": 5000.00, "ID_Departamento": 1},
+        {"ID_Funcionario": 6, "Nome": "Funcionario 6", "ID_Departamento": 2},
+        {"ID_Funcionario": 7, "Nome": "Funcionario 7", "ID_Departamento": 1},
+        {"ID_Funcionario": 8, "Nome": "Funcionario 8", "ID_Departamento": 2},
+        {"ID_Funcionario": 9, "Nome": "Funcionario 9", "ID_Departamento": 1},
+        {"ID_Funcionario": 10, "Nome": "Funcionario 10", "ID_Departamento": 2}
+
+    ],
+
+    "departamentos":[
+        {"ID_Departamento": 1, "Nome": "Vendas", "ID_Chefe":7},
+        {"ID_Departamento": 2, "Nome": "RH", "ID_Chefe":10}
+
+    ]
+
+
+
+}
