@@ -2,7 +2,7 @@
 # Requisitos:
 # - Ver lista de funcionários
 # - Ver lista de departamentos
-# - Ver informações de funcionários específico(Deve conter o Departamento de que faz parte)
+# - Ver informações de funcionários específico(Deve conter o nome do Departamento de que faz parte)
 # - Ver lista de funcionários de um departamento específico
 # - Opcional: Funcionário gerente e autenticação antes de usar o sistema
 # - Inserção de Funcionários e Departamentos
@@ -81,6 +81,47 @@ import psycopg2
 # except(Exception, psycopg2.Error) as error:
 #     print("Ocorreu um erro ao tentar a conexão:", error)
 
+def verFuncionarioEspecifico(id):
+
+    cursor.execute(f'''
+    Select * from "Funcionário"
+    WHERE "Id" = '{id}'
+    ''')
+
+    funcionario = cursor.fetchone()
+
+    if funcionario:
+        print(f'''
+        ID: {funcionario[0]}
+        Nome: {funcionario[1]}
+        Salário: R$ {funcionario[2]}
+        Cargo: R$ {funcionario[3]}
+        Departamento: {funcionario[4]}
+        ''')
+
+    else:
+        print("Funcionário não encontrado.")
+
+def verDepartamentoEspecifico(id):
+
+    cursor.execute(f'''
+    Select * from "Departamentos"
+    WHERE "Id" = '{id}'
+    ''')
+
+    departamento = cursor.fetchone()
+
+    if departamento:
+        print(f'''
+        ID: {departamento[0]}
+        Nome: {departamento[1]}
+        ''')
+
+    else:
+        print("Departamento não encontrado.")
+
+
+
 def verFuncionarios():
 
     cursor.execute('''
@@ -92,6 +133,13 @@ def verFuncionarios():
     print("ID - Nome")
     for funcionario in listaFuncionarios:
         print(f"{funcionario[0]} - {funcionario[1]}")
+
+    idEscolhido = input("Digite o id de um funcionário que deseja ver mais informações:(0 = Voltar) ")
+
+    if idEscolhido != "0":
+        verFuncionarioEspecifico(idEscolhido)
+    else:
+        print("Voltando para o menu principal.")
 
 
 def verDepartamentos():
@@ -105,6 +153,13 @@ def verDepartamentos():
     print("ID - Nome")
     for departamento in listaDepartamentos:
         print(f"{departamento[0]} - {departamento[1]}")
+
+    idEscolhido = input("Digite o id de um departamento que deseja ver mais informações:(0 = Voltar) ")
+
+    if idEscolhido != "0":
+        verDepartamentoEspecifico(idEscolhido)
+    else:
+        print("Voltando para o menu principal.")
 
 def inserirFuncionario():
     print("Você está cadastrando um funcionário.")
