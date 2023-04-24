@@ -46,7 +46,7 @@ import psycopg2
 #     "Nome" varchar(255) NOT NULL,
 #     "Salário" money NOT NULL default 0,
 #     "Cargo" varchar(255) NOT NULL default 'Autônomo',
-#     "Id_Dept" int NOT NULL default 1,
+#     "Id_Dept" int default 1,
 #      CONSTRAINT fk_departamento
 #           FOREIGN KEY("Id_Dept")
 #           REFERENCES "Departamentos"("Id")

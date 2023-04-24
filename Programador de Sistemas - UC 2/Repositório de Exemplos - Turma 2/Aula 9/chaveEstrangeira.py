@@ -36,3 +36,62 @@ Conecte as duas tabelas usando a chave Livro_autor como chave estrangeira.
 Dica: Se você já tiver criado a tabela Livros, use o comando ALTER
 
 '''
+import psycopg2
+
+def criarTabelaFuncionario():
+
+    sql = '''
+    CREATE TABLE "Funcionários"(
+    "Id" int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    "Nome" varchar(255) NOT NULL,
+    "Salário" money NOT NULL default 0,
+    "Id_Dept" int NOT NULL default 1,
+    CONSTRAINT fk_departamento
+        FOREIGN KEY("Id_Dept")
+        REFERENCES "Departamentos"("Id")
+        ON DELETE NO ACTION
+        ON UPDATE NO ACTION
+
+
+    )
+    
+    '''
+    return sql
+
+def criarTabelaDepartamento():
+
+    sql = '''
+    CREATE TABLE "Departamentos"(
+    "Id" int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    "Nome" varchar(255) NOT NULL
+
+    )
+    
+    '''
+    return sql
+
+try:
+    conn = psycopg2.connect(dbname="Empresa Exemplo", host="localhost", port="5432", user="postgres", password="postgres")
+    cursor = conn.cursor()
+
+
+    cursor.execute('''
+    INSERT INTO "Departamentos"
+    Values(default, 'Vendas'),(default,'T.I')
+    
+    ''')
+    conn.commit()
+
+    cursor.execute('''
+    INSERT INTO "Funcionários"
+    Values(default, 'Carlinhos', 5000, 2)
+    
+    ''')
+    conn.commit()
+
+    cursor.close()
+
+    conn.close()
+
+except(Exception, psycopg2.Error) as error:
+    print("Ocorreu um erro", error)
