@@ -38,6 +38,44 @@ Dica: Se você já tiver criado a tabela Livros, use o comando ALTER
 '''
 import psycopg2
 
+class Conexao:
+    def __init__(self, banco, host, port, user, senha):
+
+        self._banco = banco
+        self._host = host
+        self._port = port
+        self._user = user
+        self._senha = senha
+    
+    def consultarBanco(self,sql):
+
+        conn = psycopg2.connect(dbname=self._banco, host=self._host, port=self._port, user=self._user,password=self._senha )
+        cursor = conn.cursor()
+
+        cursor.execute(sql)
+
+        resultado = cursor.fetchall()
+
+        cursor.close()
+        conn.close()
+
+        return resultado
+
+
+    def manipularBanco(self,sql):
+
+        conn = psycopg2.connect(dbname=self._banco, host=self._host, port=self._port, user=self._user,password=self._senha )
+        cursor = conn.cursor()
+
+        cursor.execute(sql)
+
+        conn.commit()
+
+        cursor.close()
+        conn.close()
+
+
+
 def criarTabelaFuncionario():
 
     sql = '''
@@ -70,28 +108,21 @@ def criarTabelaDepartamento():
     '''
     return sql
 
-try:
-    conn = psycopg2.connect(dbname="Empresa Exemplo", host="localhost", port="5432", user="postgres", password="postgres")
-    cursor = conn.cursor()
+conexaoBanco = Conexao("Empresa Exemplo","localhost","5432","postgres","postgres")
 
+while True:
 
-    cursor.execute('''
-    INSERT INTO "Departamentos"
-    Values(default, 'Vendas'),(default,'T.I')
-    
-    ''')
-    conn.commit()
+    try:
+        print("Cadastro de Funcionário")
+        nomeFunc = input("Digite o nome do Funcionário: ")
+        salarioFunc = input("Digite o salário do Funcionário: ")
+        idDept = input("Digite o departamento: ")
 
-    cursor.execute('''
-    INSERT INTO "Funcionários"
-    Values(default, 'Carlinhos', 5000, 2)
-    
-    ''')
-    conn.commit()
+        conexaoBanco.manipularBanco(f'''
+        INSERT INTO "Funcionários"
+        VALUES(default, '{nomeFunc}', '{salarioFunc}', '{idDept}' )
+        
+        ''')
 
-    cursor.close()
-
-    conn.close()
-
-except(Exception, psycopg2.Error) as error:
-    print("Ocorreu um erro", error)
+    except(Exception, psycopg2.Error) as error:
+        print("Ocorreu um erro", error)
