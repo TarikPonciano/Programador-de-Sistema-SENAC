@@ -3,6 +3,14 @@ from Modelo.classCliente import Cliente
 from Modelo.classCompra import Compra
 from Modelo.classProduto import Produto
 
+#Cenário: Biblioteca
+
+# Construir um sistema de cadastro de aluguéis de livros.
+
+# - Deve conter um banco com as seguintes tabelas: Clientes, Aluguéis e Livros
+# - Deve conter as seguintes funcionalidades: Cadastro de Clientes, Cadastro de Aluguéis, Cadastro de Livros e Visualização dos dados das 3 tabelas.
+
+
 import psycopg2
 
 conexaoBanco = Conexao("Loja Fictícia", "localhost", "5432", "postgres", "postgres")
