@@ -29,7 +29,6 @@ def criarTabelas(con):
     CONSTRAINT fk_livro
         FOREIGN KEY("ID_Livro")
         REFERENCES "Livros"("ID")
-
     )
     '''
                 ]
