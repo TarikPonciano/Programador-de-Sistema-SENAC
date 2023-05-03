@@ -188,6 +188,13 @@ def cadastrarNovoLivro():
     else:
         print("Falha ao inserir o livro!")
 
+def verMenuAlugueis():
+    pass
+
+def cadastrarNovoAluguel():
+    pass
+
+
 
 
     
