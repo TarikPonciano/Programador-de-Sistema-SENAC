@@ -18,12 +18,14 @@ class Conexao:
 
             resultado = cursor.fetchall()
 
+            print(cursor.description)
+
             cursor.close()
             con.close()
 
             return resultado
         except(Exception, psycopg2.Error) as error:
-            print("Ocorreu um erro:", error)
+            print("Ocorreu um erro no objeto Conexão:", error)
 
             return False
         
@@ -33,6 +35,7 @@ class Conexao:
             cursor = con.cursor()
 
             cursor.execute(sql)
+            
 
             con.commit()
 
