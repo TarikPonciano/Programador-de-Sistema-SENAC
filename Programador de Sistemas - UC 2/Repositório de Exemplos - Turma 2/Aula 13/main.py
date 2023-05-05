@@ -7,6 +7,7 @@ def criarTabelas(con):
     "ID" int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     "Nome" varchar(255) NOT NULL,
     "CPF" char(11) NOT NULL UNIQUE
+    "Situação" varchar(255) NOT NULL,
     )
     ''',
                 '''
@@ -121,6 +122,114 @@ def cadastrarNovoCliente():
         print(f"O Cliente {nome} foi inserido com sucesso.")
     else:
         print("Falha ao inserir o cliente!")
+
+def atualizarCliente():
+
+    print("Tela de atualização de cliente:")
+
+    print("Lista de Clientes")
+    
+    verListaDeClientes()
+
+    clienteEscolhido = input("Digite o id do cliente escolhido:")
+
+    verClienteEspecifico(clienteEscolhido)
+
+    novoNome = input("Digite o novo nome (vazio para não alterar):")
+    novoCPF = input("Digite o novo cpf (vazio para não alterar):")
+
+    if novoNome:
+        conexaoBanco.manipularBanco(f'''
+        UPDATE "Clientes"
+        SET "Nome" = '{novoNome}'
+        WHERE "ID" = {clienteEscolhido}
+        ''')
+    if novoCPF:
+        conexaoBanco.manipularBanco(f'''
+        UPDATE "Clientes"
+        SET "CPF" = '{novoCPF}'
+        WHERE "ID" = {clienteEscolhido}
+        ''')
+
+    print("Tentativa de alteração executada.")
+
+
+def verClienteEspecifico(idCliente):
+
+    cliente = conexaoBanco.consultarBanco(f'''SELECT * FROM "Clientes"
+    WHERE "ID" = {idCliente}
+    ''')[0]
+    if cliente:
+        print("Cliente Escolhido: ")
+
+        print(f'''
+        ID - {cliente[0]}
+        Nome - {cliente[1]}
+        CPF - {cliente[2]}
+        ''')
+
+        listaAlugueis = conexaoBanco.consultarBanco(f'''
+        SELECT * FROM "Alugueis"
+        WHERE "ID_Cliente" = '{cliente[0]}'
+        ''')
+        if listaAlugueis:
+            print("Lista de alugueis: ")
+
+            print("ID | Cliente | Livro | Data de Aluguel")
+            for aluguel in listaAlugueis:
+
+                #Você já tem o id do Cliente e id do Livro, busque nas tabelas e pegue as informações
+
+                clienteDoAluguel = conexaoBanco.consultarBanco(f'''
+                SELECT * FROM "Clientes"
+                WHERE "ID" = {aluguel[1]}
+                ''')[0]
+
+                livroDoAluguel = conexaoBanco.consultarBanco(f'''
+                SELECT * FROM "Livros"
+                WHERE "ID" = {aluguel[2]}
+                ''')[0]
+
+                print(f"{aluguel[0]} | {clienteDoAluguel[1]} | {livroDoAluguel[1]} | {aluguel[3]}")
+        else:
+            print("O cliente não possui aluguéis cadastrados")
+
+    else:
+        print("O cliente não foi encontrado!")
+
+def removerCliente():
+
+    print("Tela de remoção de cliente:")
+
+    print("Lista de Clientes")
+    
+    verListaDeClientes()
+
+    clienteEscolhido = input("Digite o id do cliente escolhido:")
+
+    verClienteEspecifico(clienteEscolhido)
+
+    confirmar = input("Deseja remover este cliente? (S/N)").upper()
+
+    match confirmar:
+        case "S":
+           resultadoRemocao = conexaoBanco.manipularBanco(f'''
+           DELETE FROM "Clientes"
+           WHERE "ID" = '{clienteEscolhido}'
+           ''')
+           
+           if resultadoRemocao:
+               print("Cliente removido com sucesso.")
+           else:
+               print("Cliente não existe ou não foi removido.")
+        case "N":
+            print("Ok voltando ao menu principal")
+        case _:
+            print("Você digitou um comando inválido. Voltando ao menu.")
+
+
+
+
         
 
 def verMenuLivros():
@@ -230,6 +339,16 @@ def verListaDeAlugueis():
 
             #Você já tem o id do Cliente e id do Livro, busque nas tabelas e pegue as informações
 
+            clienteDoAluguel = conexaoBanco.consultarBanco(f'''
+            SELECT * FROM "Clientes"
+            WHERE "ID" = {aluguel[1]}
+            ''')[0]
+
+            livroDoAluguel = conexaoBanco.consultarBanco(f'''
+            SELECT * FROM "Livros"
+            WHERE "ID" = {aluguel[2]}
+            ''')[0]
+
             print(f"{aluguel[0]} | {clienteDoAluguel[1]} | {livroDoAluguel[1]} | {aluguel[3]}")
 
     else:
@@ -238,8 +357,12 @@ def verListaDeAlugueis():
 def cadastrarNovoAluguel():
     print("Cadastro de Aluguel - Insira as informações pedidas")
 
+    print("Lista de Clientes")
+    verListaDeClientes()
     cliente = input("Digite o id do Cliente:")
 
+    print("Lista de Livros")
+    verListaDeLivros()
     livro = input("Digite o id do Livro:")
 
     sqlInserir = f'''
