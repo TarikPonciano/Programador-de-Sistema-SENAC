@@ -404,11 +404,6 @@ def main():
                 print("Escolha uma opção válida.")
 
 
-
-    
-
-
-
 if __name__ == "__main__":
     conexaoBanco = Conexao("Biblioteca", "localhost",
                        "5432", "postgres", "postgres")
