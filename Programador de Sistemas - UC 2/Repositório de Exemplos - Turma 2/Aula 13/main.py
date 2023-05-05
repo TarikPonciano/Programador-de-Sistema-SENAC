@@ -158,8 +158,12 @@ def verClienteEspecifico(idCliente):
 
     cliente = conexaoBanco.consultarBanco(f'''SELECT * FROM "Clientes"
     WHERE "ID" = {idCliente}
-    ''')[0]
+    ''')
+
     if cliente:
+
+        cliente = cliente[0]
+
         print("Cliente Escolhido: ")
 
         print(f'''
