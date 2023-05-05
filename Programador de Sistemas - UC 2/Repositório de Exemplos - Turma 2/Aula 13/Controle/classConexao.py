@@ -18,7 +18,7 @@ class Conexao:
 
             resultado = cursor.fetchall()
 
-            print(cursor.description)
+            
 
             cursor.close()
             con.close()

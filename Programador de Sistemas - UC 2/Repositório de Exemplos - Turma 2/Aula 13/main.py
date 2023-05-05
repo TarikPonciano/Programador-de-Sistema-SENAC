@@ -188,23 +188,75 @@ def cadastrarNovoLivro():
         print("Falha ao inserir o livro!")
 
 def verMenuAlugueis():
-    pass
+    while True:
+        print('''
+        Opções menu alugueis:
+
+        1. Ver lista de Alugueis
+        2. Cadastrar Novo Aluguel
+        3. Atualizar Aluguel
+        4. Remover Aluguel
+        0. Voltar ao menu principal
+
+        ''')
+        op = input("Escolha uma das opções:")
+        match op:
+            case "1":
+                verListaDeAlugueis()
+            case "2":
+                cadastrarNovoAluguel()
+            case "3":
+                atualizarAluguel()
+            case "4":
+                removerAluguel()
+            case "0":
+                print("Voltando ao menu principal...")
+                break
+            case _:
+                print("Escolha uma opção válida.")
+
+        input("Digite Enter para continuar...")
+
+def verListaDeAlugueis():
+
+    listaAlugueis = conexaoBanco.consultarBanco('''
+    SELECT * FROM "Alugueis"
+    ORDER BY "ID" ASC
+    ''')
+
+    if listaAlugueis:
+        print("ID | Cliente | Livro | Data de Aluguel")
+        for aluguel in listaAlugueis:
+
+            #Você já tem o id do Cliente e id do Livro, busque nas tabelas e pegue as informações
+
+            print(f"{aluguel[0]} | {clienteDoAluguel[1]} | {livroDoAluguel[1]} | {aluguel[3]}")
+
+    else:
+        print("Ocorreu um erro na consulta, ou a lista é vazia.")
 
 def cadastrarNovoAluguel():
-    pass
+    print("Cadastro de Aluguel - Insira as informações pedidas")
 
+    cliente = input("Digite o id do Cliente:")
 
+    livro = input("Digite o id do Livro:")
 
+    sqlInserir = f'''
+    INSERT INTO "Alugueis"
+    Values(default, '{cliente}', '{livro}', default)
+    '''
 
-    
+    if conexaoBanco.manipularBanco(sqlInserir):
 
+        print(f"O Aluguel foi cadastrado com sucesso.")
+    else:
+        print("Falha ao cadastrar o aluguel!")
 
-conexaoBanco = Conexao("Biblioteca", "localhost",
-                       "5432", "postgres", "postgres")
+def main():
+    while True:
 
-while True:
-
-    print('''
+        print('''
     Bem vindo a Biblioteca XYZ
 
     1. Menu Clientes
@@ -213,17 +265,28 @@ while True:
     0. Sair
     ''')
 
-    op = input("Escolha o menu que deseja acessar:")
+        op = input("Escolha o menu que deseja acessar:")
 
-    match op:
-        case "1":
-            verMenuClientes()
-        case "2":
-            verMenuLivros()
-        case "3":
-            verMenuAlugueis()
-        case "0":
-            print("Saindo da aplicação...")
-            break
-        case _:
-            print("Escolha uma opção válida.")
+        match op:
+            case "1":
+                verMenuClientes()
+            case "2":
+                verMenuLivros()
+            case "3":
+                verMenuAlugueis()
+            case "0":
+                print("Saindo da aplicação...")
+                break
+            case _:
+                print("Escolha uma opção válida.")
+
+
+
+    
+
+
+
+if __name__ == "__main__":
+    conexaoBanco = Conexao("Biblioteca", "localhost",
+                       "5432", "postgres", "postgres")
+    main()
