@@ -22,7 +22,7 @@ def criarTabelas(con):
     "ID" int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     "ID_Cliente" int NOT NULL,
     "ID_Livro" int NOT NULL,
-    "Data do Aluguel" timestamp default CURRENT_TIMESTAMP(2),
+    "Data do Aluguel" timestamp default CURRENT_TIMESTAMP(0),
     CONSTRAINT fk_cliente
         FOREIGN KEY("ID_Cliente")
         REFERENCES "Clientes"("ID")
