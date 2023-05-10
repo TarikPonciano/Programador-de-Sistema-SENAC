@@ -34,7 +34,7 @@ corpoDoTexto = CTkLabel(master=app, text="Este é meu programa!", font=CTkFont(s
 corpoDoTexto.grid(row=1, column=0, padx=20, pady = 20)
 
 inserirTexto = CTkEntry(master=app, placeholder_text="Digite uma nova mensagem aqui!",)
-inserirTexto.grid(row=2, column=0, padx=100, pady=20)
+inserirTexto.grid(row=2, column=0, padx=20, pady=20)
 
 inserirBotao = CTkButton(master=app,bg_color="blue",text="Enviar", command=cliqueInserir)
 inserirBotao.grid(row=3, column=1, padx=20, pady=20)
