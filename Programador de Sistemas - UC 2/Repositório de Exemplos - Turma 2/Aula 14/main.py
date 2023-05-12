@@ -1,44 +1,79 @@
-#Recursos
 
-# Repositório Oficial - https://github.com/TomSchimansky/CustomTkinter
-# Site Oficial (Documentação) - https://customtkinter.tomschimansky.com/
-# Playlist tutorial em português - https://www.youtube.com/watch?v=hIJ6sf0x3Yw&list=PL6KTZQDPGs5gZYtK9YblxA-Te9wQM8mdb 
+from Controle.classConexao import Conexao
+from customtkinter import *
 
-#Objetivos
+conexaoBanco = Conexao("Biblioteca", "localhost",
+                       "5432", "postgres", "postgres")
+set_appearance_mode("dark")
 
-# - Criar uma janela
-# - Colocar texto nessa janela
-# - Modificar o texto na janela utilizando um input
-# - Criar um formulário de inserção
-# - Integrar o formulário com o banco de dados
-# - Criar um menu
+class App(CTk):
+    def __init__(self):
+        super().__init__()
 
-from customtkinter import * #pip install customtkinter
+        self.title("Cadastro de Livros")
+        self.geometry("800x600")
 
-app = CTk()
-app.title("Teste")
-larguraJanela = 800
-alturaJanela = 600
-app.geometry(f"{larguraJanela}x{alturaJanela}")
+        self.grid_columnconfigure(0, weight=1)
+        self.grid_rowconfigure(1, weight=1)
 
-app.grid_columnconfigure((0,1), weight=1)
+        self.fonteTitulo = CTkFont(size=32, weight="bold")
+        self.fontePadrao = CTkFont(size=24, weight="normal")
 
-def cliqueInserir():
-    texto = inserirTexto.get()
-    corpoDoTexto.configure(text=texto)
+        self.tituloSuperior = CTkLabel(master=self, text="Tela de Cadastro de Livros", font=self.fonteTitulo)
+        self.tituloSuperior.grid(column=0, row=0, padx = 20, pady = 20)
 
-tituloTopo = CTkLabel(master=app, text= "Olá Mundo!", text_color="red", font=CTkFont(size=36,weight="bold"))
-tituloTopo.grid(row=0,column=0, padx=20, pady=20)
+        self.formularioCadastroLivros = FormularioCadastro(self)
+        self.formularioCadastroLivros.grid(column=0, row=1, padx=20, pady=20, sticky="nsew")
 
-corpoDoTexto = CTkLabel(master=app, text="Este é meu programa!", font=CTkFont(size=36))
-corpoDoTexto.grid(row=1, column=0, padx=20, pady = 20)
+class FormularioCadastro(CTkScrollableFrame):
+    def __init__(self, master):
+        super().__init__(master=master, border_color="red", corner_radius=10)
 
-inserirTexto = CTkEntry(master=app, placeholder_text="Digite uma nova mensagem aqui!",)
-inserirTexto.grid(row=2, column=0, padx=20, pady=20)
+        self.fonteTitulo = CTkFont(size=32, weight="bold")
+        self.fontePadrao = CTkFont(size=24, weight="normal")
 
-inserirBotao = CTkButton(master=app,bg_color="blue",text="Enviar", command=cliqueInserir)
-inserirBotao.grid(row=3, column=1, padx=20, pady=20)
+        self.grid_columnconfigure((1), weight= 1)
+
+        self.rotuloNome = CTkLabel(master=self, text="Nome", font=self.fontePadrao)
+        self.rotuloNome.grid(column=0, row=0, padx=(30,50), pady=(20,40))
+
+        self.inserirNome = CTkEntry(master=self, placeholder_text="Insira o nome do Livro")
+        self.inserirNome.grid(column=1, row=0, padx=(0,150), pady=(20,40),sticky="ew")
+
+        self.rotuloAutor = CTkLabel(master=self, text="Autor", font=self.fontePadrao)
+        self.rotuloAutor.grid(column=0, row=1, padx=(30,50), pady=(20,40))
+
+        self.inserirAutor = CTkEntry(master=self, placeholder_text="Insira o nome do Autor")
+        self.inserirAutor.grid(column=1, row=1, padx=(0,150), pady=(20,40),sticky="ew")
+
+        self.inserirLivro = CTkButton(master=self, text="Enviar", command=self.inserirLivroNoBanco)
+        self.inserirLivro.grid(column=1,row=3, padx=(0,200), pady=(20,0))
+
+        self.rotuloResultado = CTkLabel(master=self)
+        self.rotuloResultado.grid(column=1, row=4, padx=(0,200), pady=20)
+
+    def inserirLivroNoBanco(self):
+        nomeLivro = self.inserirNome.get()
+        autorLivro = self.inserirAutor.get()
+
+        if not nomeLivro or not autorLivro:
+            self.rotuloResultado.configure(text="Digite as informações", text_color="red")
+
+        else:
+            if(conexaoBanco.manipularBanco(f'''
+            INSERT INTO "Livros"
+            Values(default,'{nomeLivro}','{autorLivro}')
+            
+            ''')):
+                self.rotuloResultado.configure(text="Livro inserido com sucesso", text_color="green")
+
+            else:
+                self.rotuloResultado.configure(text="Houve um erro ao inserir o livro", text_color="red")
 
 
+
+
+app = App()
 
 app.mainloop()
+
