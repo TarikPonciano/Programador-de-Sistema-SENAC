@@ -1,6 +1,5 @@
 
 from customtkinter import *
-from functools import partial
 
 class App(CTk):
 
