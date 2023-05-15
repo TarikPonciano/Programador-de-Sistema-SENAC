@@ -19,10 +19,16 @@ for i in range(151):
 
 
     pokeDict = resultado.json()
+    tipo = pokeDict["types"][0]["type"]["name"]
 
     print(pokeDict["id"])
     print(pokeDict["name"])
     print(pokeDict["height"])
     print(pokeDict["weight"])
+    print(tipo)
+
+    print("----------------------------------")
+    input()
+
 
 
