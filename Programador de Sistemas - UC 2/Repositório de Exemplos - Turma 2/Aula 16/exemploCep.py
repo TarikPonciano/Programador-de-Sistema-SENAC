@@ -55,7 +55,7 @@ class App(CTk):
         try:
 
             requisicao = requests.get(f"https://viacep.com.br/ws/{cep}/json/")
-
+            
             endereco = requisicao.json()
 
             self.inputLogradouro.delete('0','end')
