@@ -1,0 +1,16 @@
+- Declaração de Funções
+
+- Programação Orientada a Objetos
+
+- Armazenamento de dados (Criando arquivos)
+
+- Diagramação e Planejamento de Banco(Modelo Entidade e Relacionamento, Modelo Físico de Dados e os Diagramas)
+
+- Banco de dados (PostgreSQL e Sintaxe SQL)
+
+- Interfaces Gráficas (CustomTkinter)
+
+- Rest Api 
+
+
+Enquete: https://poll-maker.com/poll4817006x5D9949e7-149
