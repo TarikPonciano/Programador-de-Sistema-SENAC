@@ -81,6 +81,30 @@ def verPokemons():
     
     else:
         return "Ocorreu um erro"
+    
+@app.route("/pokemons/inserir", methods=("GET","POST"))
+def inserirPokemons():
+
+    if request.method == "GET":
+
+        return render_template("inserirPokemon.html")
+    
+    if request.method == "POST":
+
+        
+        idPokemon = request.form['ID']
+        especiePokemon = request.form['ESPECIE']
+        pesoPokemon = request.form['PESO']
+        alturaPokemon = request.form['ALTURA']
+        tipoPokemon = request.form['TIPO']
+
+        resultado = conexaoBanco.manipularBanco(f'''INSERT INTO "Pokemons"
+        values('{idPokemon}','{especiePokemon}','{pesoPokemon}','{alturaPokemon}','{tipoPokemon}')''')
+
+        if resultado:
+            return redirect(url_for("verPokemons"))
+        else:
+            return "Erro na inserção"
 
 
 if __name__ == "__main__":
