@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset ="UTF-8">
+    <title>Teste Flask - Ver Pokemons</title>
+
+</head>
+
+<body>
+    <a href="/Pokemons/Inserir">Cadastro de Pokemons</a>
+    <h1>Lista de Pokemons:</h1>
+
+    <ul>
+        {% for pokemon in pokemons %}
+        <li>ID: {{pokemon[0]}} - Nome: {{pokemon[1]}} - Peso: {{pokemon[2]}} - Altura: {{pokemon[3]}} - Tipo: {{pokemon[4]}}</li>
+        {%endfor%}
+    </ul>
+
+</body>
+
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FlaskBlog</title>
+</head>
+<body>
+
+   <h1>Pokedex</h1>
+   {% for pokemon in pokemons %}
+        <h2>ID: {{pokemon[0]}}</h2>
+        <h2>Nome: {{pokemon[1]}}</h2>
+    {% endfor %}
+
+</body>
+</html>
