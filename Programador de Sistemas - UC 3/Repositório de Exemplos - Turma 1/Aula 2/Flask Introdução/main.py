@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request,flash
+from flask import Flask, render_template, request,flash, redirect, url_for
 import psycopg2
 
 app = Flask(__name__)
@@ -50,7 +50,7 @@ def inserirPokemons():
 
             flash("Deu certo")
 
-            return render_template("pokemons.html")
+            return redirect(url_for("verPokemons"))
         except(Exception, psycopg2.Error) as error:
             return f"Ocorreu um erro {error}"
 

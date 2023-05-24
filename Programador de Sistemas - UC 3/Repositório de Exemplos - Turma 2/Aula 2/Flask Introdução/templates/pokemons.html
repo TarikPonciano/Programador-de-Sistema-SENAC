@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>Lista Pokemons</title>
+
+</head>
+
+<body>
+    <h1>Minha Pokedex</h1>
+        <a href="/">Voltar</a>
+    
+    <ul>
+        {%for pokemon in listaPokemons%}
+        <li>ID - {{pokemon[0]}} | Espécie - {{pokemon[1]}} | Peso - {{pokemon[2]}} | Altura - {{pokemon[3]}} | Tipo - {{pokemon[4]}}</li>
+        {%endfor%}
+    </ul>
+
+
+
+
+</body>
+
+</html>
