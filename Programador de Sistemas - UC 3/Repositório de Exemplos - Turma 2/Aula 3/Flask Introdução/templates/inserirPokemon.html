@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>Cadastro Pokemons</title>
+
+</head>
+
+<body>
+    <h1>Cadastro Pokemon</h1>
+    <form method="post">
+        <div>
+            <label>Id</label>
+            <input placeholder="Digite o Id" name="ID" value="{{request.form['ID']}}"></input>
+        </div>
+
+        <div>
+            <label>Espécie</label>
+            <input placeholder="Digite a Espécie"  name="ESPECIE" value="{{request.form['ESPECIE']}}"></input>
+        </div>
+
+        <div>
+            <label>Peso</label>
+            <input placeholder="Digite o Peso" name="PESO" value="{{request.form['PESO']}}"></input>
+        </div>
+        <div>
+            <label>Altura</label>
+            <input placeholder="Digite a Altura" name="ALTURA" value="{{request.form['ALTURA']}}"></input>
+        </div>
+        <div>
+            <label>Tipo</label>
+            <input placeholder="Digite o Tipo" name="TIPO" value="{{request.form['TIPO']}}"></input>
+        </div>
+        <button type="submit">Enviar</button>
+    </form>
+
+
+
+</body>
+
+</html>
