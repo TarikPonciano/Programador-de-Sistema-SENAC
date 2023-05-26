@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 
 <html lang="en">
 
@@ -37,6 +37,103 @@
         <button type="submit">Enviar</button>
     </form>
 
+
+
+</body>
+
+</html> -->
+
+<!-- <!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset ="UTF-8">
+    <title>Teste Flask</title>
+
+    <style href="">
+        p{
+            color:rebeccapurple;
+        }
+        .outroH1{
+            color: blue;
+        }
+    </style>
+
+</head>
+
+<body>
+    <h1>Hello World</h1>
+    
+    <p>Lorem ipsor dolor</p>
+    <p> Outro P</p>
+
+    <h1 class="outroH1"> Outro h1</h1>
+
+    <ul>
+        <li> Item 1 </li>
+        <li> Item 2 </li>
+        <li> Item 3 </li>
+
+    </ul>
+
+    <a href="/pokemons">Ver Pokemons</a>
+
+    <a href="/pokemons/inserir">Cadastrar Pokemon</a>
+
+    <a href="https://google.com" target="_blank">Ir para o Google</a>
+
+</body>
+</html> -->
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>Cadastro de Pokemon</title>
+
+</head>
+
+<body>
+
+   <!-- <h1 style="font-style: normal; position: relative; left: 40%;"> Meu Projeto Flask </h1> -->
+   <h1> Formulário de Cadastro Pokemon </h1>
+   <a href="/">Voltar</a>
+
+   <form method="post">
+
+    <div>
+        <label>ID Pokemon</label>
+        <input placeholder="Digite o ID do Pokemon" name = "ID" value = "{{request.form['ID']}}">
+    </div>
+
+    <div>
+        <label>Especie</label>
+        <input placeholder="Digite a Espécie do Pokemon" name = "ESPECIE" value = "{{request.form['ESPECIE']}}">
+    </div>
+
+    <div>
+        <label>Peso</label>
+        <input placeholder="Digite o peso do Pokemon" name = "PESO" value = "{{request.form['PESO']}}">
+    </div>
+
+    <div>
+        <label>Altura</label>
+        <input placeholder="Digite a altura do Pokemon" name = "ALTURA" value = "{{request.form['ALTURA']}}">
+    </div>
+
+    <div>
+        <label>Tipo</label>
+        <input placeholder="Digite o tipo do Pokemon" name = "TIPO" value = "{{request.form['TIPO']}}">
+    </div>
+
+    <button type="submit">Enviar</button>
+   </form>
+   
 
 
 </body>
