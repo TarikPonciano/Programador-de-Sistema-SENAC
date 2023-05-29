@@ -22,7 +22,15 @@
     <b>Altura</b> - {{pokemon[3]}} Polegadas<br>
     <b>Tipo</b> - {{pokemon[4]}}<br>
    </p>
+   <div>
+   <a href="/pokemons/{{pokemon[0]}}/remover">Remover este Pokemon</a>
 
+   <a href="{{url_for('removerPokemonEspecifico',idPokemon=pokemon[0])}}">Remover este Pokemon ver 2</a>
+</div>
+<div>
+    <a href="/pokemons/{{pokemon[0]}}/atualizar">Atualizar este Pokemon</a>
+</div>
+   
 
 </body>
 

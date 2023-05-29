@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>Atualizar Pokemon</title>
+
+</head>
+
+<body>
+
+   <!-- <h1 style="font-style: normal; position: relative; left: 40%;"> Meu Projeto Flask </h1> -->
+   <h1> Formulário de Atualização Pokemon </h1>
+   <a href="{{url_for('verPokemonEspecifico',idPokemon=pokemon[0])}}">Voltar</a>
+
+   <form method="post">
+
+    <div>
+        <label>ID Pokemon</label>
+        <input placeholder="Digite o ID do Pokemon" name = "ID" value = "{{pokemon[0]}}">
+    </div>
+
+    <div>
+        <label>Especie</label>
+        <input placeholder="Digite a Espécie do Pokemon" name = "ESPECIE" value = "{{pokemon[1]}}">
+    </div>
+
+    <div>
+        <label>Peso</label>
+        <input placeholder="Digite o peso do Pokemon" name = "PESO" value = "{{pokemon[2]}}">
+    </div>
+
+    <div>
+        <label>Altura</label>
+        <input placeholder="Digite a altura do Pokemon" name = "ALTURA" value = "{{pokemon[3]}}">
+    </div>
+
+    <div>
+        <label>Tipo</label>
+        <input placeholder="Digite o tipo do Pokemon" name = "TIPO" value = "{{pokemon[4]}}">
+    </div>
+
+    <button type="submit">Enviar</button>
+   </form>
+   
+
+
+</body>
+
+</html>

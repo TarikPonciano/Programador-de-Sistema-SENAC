@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>Pokemon Removido</title>
+
+</head>
+
+<body>
+
+   <!-- <h1 style="font-style: normal; position: relative; left: 40%;"> Meu Projeto Flask </h1> -->
+   <h1> Você removeu um pokemon com sucesso </h1>
+   <a href="{{url_for('verPokemons')}}">Voltar para Pokedex</a>
+   
+
+   <h2>Informações do Pokemon Removido:</h2>
+
+   <p>
+    ID - {{pokemon[0]}} | Espécie - {{pokemon[1]}}
+   </p>
+
+
+</body>
+
+</html>

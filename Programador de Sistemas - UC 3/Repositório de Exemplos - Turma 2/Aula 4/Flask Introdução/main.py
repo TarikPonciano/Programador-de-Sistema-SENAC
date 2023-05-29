@@ -131,11 +131,58 @@ def verPokemonEspecifico(idPokemon):
         if resultado:
             # return jsonify(resultado)
 
-            return render_template("verPokemon.html",pokemon = resultado[0])
+            return render_template("verPokemon.html", pokemon = resultado[0])
         
         else:
 
             return "Ocorreu um erro"
+        
+@app.route("/pokemons/<int:idPokemon>/atualizar", methods=("GET", "POST"))
+def atualizarPokemonEspecifico(idPokemon):
+    if request.method == "GET":
+
+        pokemonPraAtualizar = conexaoBanco.consultarBanco(f'''SELECT * FROM "Pokemons"
+        WHERE "Id" = {idPokemon}''')
+
+        return render_template("atualizarPokemon.html",pokemon = pokemonPraAtualizar[0])
+
+    if request.method == "POST":
+
+        resultado = conexaoBanco.manipularBanco(f'''
+            UPDATE "Pokemons"
+            SET
+            "Id" = {request.form['ID']}, "Espécie" = '{request.form['ESPECIE']}', "Peso" = '{request.form["PESO"]}', "Altura" = '{request.form["ALTURA"]}', "Tipo" = '{request.form["TIPO"]}'
+            WHERE
+            "Id" = '{idPokemon}'
+
+            ''')
+
+        
+        if resultado:
+
+            return redirect(url_for("verPokemonEspecifico",idPokemon=idPokemon))
+        else:
+            return "Erro na atualização"
+
+@app.route("/pokemons/<int:idPokemon>/remover")
+def removerPokemonEspecifico(idPokemon):
+
+    verificarPokemon = conexaoBanco.consultarBanco(f'''SELECT * FROM "Pokemons"
+    WHERE "Id" = {idPokemon}''')
+    
+    if verificarPokemon:
+        resultado = conexaoBanco.manipularBanco(f'''
+        DELETE FROM "Pokemons"
+        WHERE "Id" = {idPokemon}
+        ''')
+
+        if resultado:
+            return render_template("pokemonRemovido.html", pokemon=verificarPokemon[0])
+        else:
+            return f"{resultado} Ocorreu um erro ao remover o Pokemon"
+    else:
+        return "Pokemon não existe"
+
 
 
 

@@ -17,14 +17,14 @@ class Conexao:
             cursor.execute(sql)
 
             resultado = cursor.fetchall()
-
             
-
             cursor.close()
             con.close()
 
-
-            return resultado
+            if resultado == [()]:
+                return False
+            else:
+                return resultado
         except(Exception, psycopg2.Error) as error:
             print("Ocorreu um erro no objeto Conexão:", error)
 
