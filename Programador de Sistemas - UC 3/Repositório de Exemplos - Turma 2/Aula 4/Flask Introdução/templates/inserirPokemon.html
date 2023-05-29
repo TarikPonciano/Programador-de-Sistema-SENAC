@@ -96,6 +96,8 @@
     <meta charset="UTF-8">
     <title>Cadastro de Pokemon</title>
 
+    <link rel="stylesheet" href="{{url_for('static',filename='CSS/meuCss.css')}}">
+
 </head>
 
 <body>
@@ -107,7 +109,7 @@
    <form method="post">
 
     <div>
-        <label>ID Pokemon</label>
+        <label class="teste">ID Pokemon</label>
         <input placeholder="Digite o ID do Pokemon" name = "ID" value = "{{request.form['ID']}}">
     </div>
 
@@ -133,6 +135,13 @@
 
     <button type="submit">Enviar</button>
    </form>
+
+   {%if mensagem == "Deu Certo"%}
+
+   <p>{{mensagem}}</p>
+
+   {%endif%}
+
    
 
 

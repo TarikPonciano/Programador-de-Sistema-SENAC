@@ -117,7 +117,7 @@ def inserirPokemon():
             ''')
         
         if resultado:
-
+            return render_template("inserirPokemon.html", mensagem="Deu Certo")
             return redirect(url_for("verPokemons"))
         else:
             return "Erro na inserção"
