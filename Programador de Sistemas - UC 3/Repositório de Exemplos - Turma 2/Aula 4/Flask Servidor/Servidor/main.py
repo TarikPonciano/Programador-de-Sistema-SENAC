@@ -49,6 +49,7 @@ def pokemons():
         else:
             return jsonify({'mensagem':"Deu errado"})
         
+        
 
     
 
