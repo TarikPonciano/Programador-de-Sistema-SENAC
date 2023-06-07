@@ -34,7 +34,7 @@ CREATE TABLE public."Pokedex" (
 );
 
 
-ALTER TABLE public."Pokedex" OWNER TO postgres;
+ALTER TABLE public."Pokedex" OWNER TO cateqadmin;
 
 --
 -- Data for Name: Pokedex; Type: TABLE DATA; Schema: public; Owner: postgres
